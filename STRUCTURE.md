@@ -15,8 +15,9 @@
 | `services.html` | Servizi |
 | `l-artiste.html` | L'artista |
 | `contact.html` | Contatto / preventivo (Formspree) |
-| `mentions-legales.html` | Note legali |
-| `confidentialite.html` | Privacy / RGPD |
+| `mentions-legales.html` | Mentions légales (éditeur, hébergement, propriété intellectuelle) |
+| `cgu.html` | Conditions générales d'utilisation du site |
+| `confidentialite.html` | Politique de confidentialité (RGPD) |
 
 ### Inglese (`en/`)
 
@@ -32,7 +33,8 @@
 | `en/the-artist.html` | The artist |
 | `en/contact.html` | Contact (Formspree) |
 | `en/legal-notice.html` | Legal notice |
-| `en/privacy.html` | Privacy |
+| `en/terms.html` | Terms of use |
+| `en/privacy.html` | Privacy policy |
 
 Le pagine FR/EN sono collegate tra loro (switch lingua, `hreflang`, canonical).
 
