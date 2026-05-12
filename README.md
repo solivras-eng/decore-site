@@ -8,6 +8,10 @@ Sito vetrina per la location eventi **Le Décor à l'Envers** (Bagnolet). Conten
 
 Il codice vive sotto l’organizzazione **`solivras-eng`**, repository **`decore-site`** — non sotto un utente personale tipo `fedeforai`. Per **`git push`** e per collegare **Vercel** al repo, GitHub deve autenticarti con un account che ha **diritto di scrittura** su `solivras-eng/decore-site` (membro dell’org `solivras-eng`, deploy key, o PAT generato da quell’account). Se sul Mac è salvata la sessione di un altro utente (es. `fedeforai`), Git rifiuterà il push con **403**: usa `gh auth login` con l’account corretto oppure [revoca / aggiorna le credenziali](https://docs.github.com/en/get-started/git-basics/managing-remote-repositories) in Accesso Portachiavi per `github.com`.
 
+### Email di contatto sul sito
+
+L’indirizzo pubblico **contact@agnesbouche.com** è quello usato in footer, pagine legali (ove applicabile) e nello schema JSON-LD. Nei footer delle pagine principali compare anche una breve **nota** (classe `footer-email-note`) che spiega che le richieste legate al dominio **decoralenvers.fr** sono gestite da quella casella.
+
 ## Anteprima locale
 
 Dalla root di questo progetto (la cartella che contiene `index.html`):
