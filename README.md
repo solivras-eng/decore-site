@@ -4,6 +4,10 @@ Sito vetrina per la location eventi **Le Décor à l'Envers** (Bagnolet). Conten
 
 **Repository GitHub:** [https://github.com/solivras-eng/decore-site](https://github.com/solivras-eng/decore-site)
 
+### Organizzazione e account (importante)
+
+Il codice vive sotto l’organizzazione **`solivras-eng`**, repository **`decore-site`** — non sotto un utente personale tipo `fedeforai`. Per **`git push`** e per collegare **Vercel** al repo, GitHub deve autenticarti con un account che ha **diritto di scrittura** su `solivras-eng/decore-site` (membro dell’org `solivras-eng`, deploy key, o PAT generato da quell’account). Se sul Mac è salvata la sessione di un altro utente (es. `fedeforai`), Git rifiuterà il push con **403**: usa `gh auth login` con l’account corretto oppure [revoca / aggiorna le credenziali](https://docs.github.com/en/get-started/git-basics/managing-remote-repositories) in Accesso Portachiavi per `github.com`.
+
 ## Anteprima locale
 
 Dalla root di questo progetto (la cartella che contiene `index.html`):
@@ -54,6 +58,12 @@ cd decore-site
 ```
 
 Per autenticazione su `git push`: [GitHub CLI](https://cli.github.com/) (`gh auth login`), **Personal Access Token** (HTTPS) oppure **SSH** (`git@github.com:solivras-eng/decore-site.git`) se hai già una chiave registrata su GitHub.
+
+**Errore 403 / «Permission denied»** — Di solito significa che Git sta usando un account **senza** permesso sull’org **`solivras-eng`** (es. push tentato come `fedeforai` verso `solivras-eng/decore-site`). Accedi con un utente membro di **`solivras-eng`** o con PAT/SSH associati a quell’accesso. Poi dalla cartella del sito:
+
+```bash
+git push -u origin main
+```
 
 ### Repository pesante (immagini)
 

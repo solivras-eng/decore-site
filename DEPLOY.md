@@ -1,6 +1,6 @@
 # Mise en ligne (GitHub + Vercel + IONOS)
 
-**Italiano (intro)** — Questa guida spiega come pubblicare il sito: repository GitHub, deploy su Vercel, dominio (es. IONOS) e modulo Formspree. Il repository ufficiale è **`solivras-eng/decore-site`**: [https://github.com/solivras-eng/decore-site](https://github.com/solivras-eng/decore-site). Per panoramica del codice vedi anche [`README.md`](README.md) e [`STRUCTURE.md`](STRUCTURE.md).
+**Italiano (intro)** — Questa guida spiega come pubblicare il sito: repository GitHub, deploy su Vercel, dominio (es. IONOS) e modulo Formspree. Il repository ufficiale è nell’organizzazione **`solivras-eng`**, repo **`decore-site`**: [https://github.com/solivras-eng/decore-site](https://github.com/solivras-eng/decore-site). Per `git push` usa un account GitHub con permesso di scrittura su quell’org (non un altro utente senza accesso, altrimenti errore 403). Per panoramica del codice vedi anche [`README.md`](README.md) e [`STRUCTURE.md`](STRUCTURE.md).
 
 ---
 
