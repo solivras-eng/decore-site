@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.decoralenvers.fr/</loc><changefreq>weekly</changefreq><priority>1</priority></url>
+  <url><loc>https://www.decoralenvers.fr/le-loft.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.decoralenvers.fr/evenements.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.decoralenvers.fr/galerie.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://www.decoralenvers.fr/temoignages.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.decoralenvers.fr/disponibilites.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://www.decoralenvers.fr/services.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://www.decoralenvers.fr/contact.html</loc><changefreq>monthly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://www.decoralenvers.fr/mentions-legales.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.decoralenvers.fr/confidentialite.html</loc><changefreq>yearly</changefreq><priority>0.35</priority></url>
+  <url><loc>https://www.decoralenvers.fr/en/</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://www.decoralenvers.fr/en/le-loft.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://www.decoralenvers.fr/en/evenements.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://www.decoralenvers.fr/en/galerie.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.decoralenvers.fr/en/temoignages.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.decoralenvers.fr/en/disponibilites.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.decoralenvers.fr/en/services.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.decoralenvers.fr/en/contact.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.decoralenvers.fr/en/legal-notice.html</loc><changefreq>yearly</changefreq><priority>0.25</priority></url>
+  <url><loc>https://www.decoralenvers.fr/en/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.decoralenvers.fr/l-artiste.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.decoralenvers.fr/en/the-artist.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+</urlset>
