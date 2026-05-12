@@ -320,7 +320,8 @@ body.cursor-dark .cursor-dot  { background: #fff; }
 .header-nav a.active::after { transform: scaleX(1); }
 .header-actions { display: flex; align-items: center; gap: 1rem; }
 .hamburger {
-  display: none;
+  display: flex;
+  flex-shrink: 0;
   flex-direction: column;
   justify-content: center;
   gap: 6px;
@@ -1382,7 +1383,6 @@ body.cursor-dark .cursor-dot  { background: #fff; }
   .footer-grid  { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   .hero-vertical { display: none; }
   .header-nav  { display: none; }
-  .hamburger   { display: flex; }
   .header-actions .btn { display: none; }
 }
 @media (max-width: 768px) {
