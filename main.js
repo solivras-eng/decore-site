@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ─── MOBILE STICKY CTA (header btn hidden ≤1024px) ─ */
+  /* ─── MOBILE STICKY CTA (header btn hidden ≤1280px) ─ */
   (function mobileStickyCta() {
     if (document.querySelector('.mobile-sticky-cta')) return;
     const bar = document.createElement('div');
