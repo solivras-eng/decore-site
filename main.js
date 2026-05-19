@@ -2,7 +2,113 @@
    LE DÉCOR À L'ENVERS — Shared JS
    ═══════════════════════════════════════════════════ */
 
-document.addEventListener('DOMContentLoaded', () => {
+function siteConfig() {
+  return window.DECOR_SITE || {};
+}
+
+function isEnglishPage() {
+  return document.documentElement.lang === 'en' || /\/en\//.test(location.pathname);
+}
+
+function assetPath(relative) {
+  return isEnglishPage() ? '../' + relative : relative;
+}
+
+function injectGoogleLinks() {
+  const cfg = siteConfig();
+  const biz = String(cfg.googleBusinessUrl || '').trim();
+  const review = String(cfg.googleReviewUrl || '').trim();
+  const isEn = isEnglishPage();
+
+  if (biz) {
+    document.querySelectorAll('.footer-social, .contact-social-links').forEach(el => {
+      if (el.querySelector('[data-google-link]')) return;
+      const a = document.createElement('a');
+      a.href = biz;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = 'Google';
+      a.setAttribute('data-google-link', '');
+      if (el.classList.contains('footer-social')) {
+        const soon = el.querySelector('.footer-soon');
+        if (soon) el.insertBefore(a, soon);
+        else el.appendChild(a);
+      } else {
+        el.appendChild(a);
+      }
+    });
+  }
+
+  document.querySelectorAll('[data-gbp-disclaimer]').forEach(el => {
+    if (!biz) return;
+    const link = document.createElement('a');
+    link.href = biz;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = 'Google';
+    link.style.color = 'var(--rouille)';
+    const prefix = document.createTextNode(isEn ? ' and our ' : ' et notre fiche ');
+    const suffix = document.createTextNode(isEn ? ' listing.' : '.');
+    el.appendChild(prefix);
+    el.appendChild(link);
+    el.appendChild(suffix);
+  });
+
+  document.querySelectorAll('[data-gbp-review-cta]').forEach(el => {
+    if (!review) return;
+    const a = document.createElement('a');
+    a.href = review;
+    a.className = 'btn btn-outline';
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.textContent = isEn ? 'Leave a review on Google' : 'Laisser un avis sur Google';
+    el.appendChild(a);
+    el.hidden = false;
+    el.style.display = 'inline-block';
+    el.style.marginTop = '1rem';
+  });
+}
+
+function patchJsonLdSameAs() {
+  const biz = String(siteConfig().googleBusinessUrl || '').trim();
+  if (!biz) return;
+  const el = document.querySelector('script[type="application/ld+json"]');
+  if (!el) return;
+  try {
+    const data = JSON.parse(el.textContent);
+    data.sameAs = data.sameAs || [];
+    if (!data.sameAs.includes(biz)) data.sameAs.push(biz);
+    el.textContent = JSON.stringify(data, null, 2);
+  } catch (_) { /* ignore */ }
+}
+
+async function loadGoogleReviews() {
+  const stores = document.querySelectorAll('[data-testimonial-store]');
+  if (!stores.length) return;
+  try {
+    const res = await fetch(assetPath('assets/data/reviews.json'));
+    if (!res.ok) return;
+    const data = await res.json();
+    const reviews = Array.isArray(data.reviews) ? data.reviews : [];
+    stores.forEach(store => {
+      reviews.forEach(r => {
+        if (!r.quote) return;
+        const div = document.createElement('div');
+        div.setAttribute('data-testimonial', '');
+        div.dataset.quote = r.quote;
+        div.dataset.author = r.author || '';
+        div.dataset.role = r.role || (isEnglishPage() ? 'Google review' : 'Avis Google');
+        if (r.source) div.dataset.source = r.source;
+        store.appendChild(div);
+      });
+    });
+  } catch (_) { /* optional file */ }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadGoogleReviews();
+  injectGoogleLinks();
+  patchJsonLdSameAs();
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const useFineCursor = window.matchMedia('(pointer: fine)').matches && !prefersReducedMotion;
@@ -107,14 +213,33 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.testimonial-wrap').forEach(wrap => {
     const root = wrap.closest('.container') || document;
     const testimonials = root.querySelectorAll('[data-testimonial]');
-    const dots = wrap.querySelectorAll('.testimonial-dot');
+    const dotsContainer = wrap.querySelector('.testimonial-dots');
     const quoteEl = wrap.querySelector('.testimonial-quote');
     const authorEl = wrap.querySelector('.testimonial-author');
     const roleEl = wrap.querySelector('.testimonial-role');
 
     if (!testimonials.length || !quoteEl || !authorEl) return;
 
+    const dots = [];
+    if (dotsContainer) {
+      while (dotsContainer.firstChild) dotsContainer.removeChild(dotsContainer.firstChild);
+      testimonials.forEach((_, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
+        btn.setAttribute('aria-label', (isEnglishPage() ? 'Testimonial ' : 'Témoignage ') + (i + 1));
+        dotsContainer.appendChild(btn);
+        dots.push(btn);
+      });
+    }
+
     let current = 0;
+
+    const formatRole = t => {
+      const role = t.dataset.role || '';
+      if (t.dataset.source !== 'google') return role;
+      return isEnglishPage() ? 'Google review' : 'Avis Google';
+    };
 
     const show = idx => {
       current = (idx + testimonials.length) % testimonials.length;
@@ -124,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         quoteEl.textContent = t.dataset.quote;
         authorEl.textContent = t.dataset.author;
-        if (roleEl) roleEl.textContent = t.dataset.role || '';
+        if (roleEl) roleEl.textContent = formatRole(t);
         quoteEl.style.opacity = '1';
         authorEl.style.opacity = '1';
       }, 280);
@@ -186,6 +311,10 @@ document.addEventListener('DOMContentLoaded', () => {
         showFormError('Formulaire mal configuré (action Formspree manquante).');
         return;
       }
+
+      const emailInput = contactForm.querySelector('[name="email"]');
+      const replytoInput = contactForm.querySelector('[name="_replyto"]');
+      if (emailInput && replytoInput) replytoInput.value = emailInput.value.trim();
 
       const submitBtn = contactForm.querySelector('button[type="submit"]');
       if (submitBtn) submitBtn.disabled = true;

@@ -1,0 +1,16 @@
+{
+  "reviews": [
+    {
+      "quote": "Un lieu d’exception pour notre événement : lumière, volumes et accueil au top. Nous recommandons vivement Le Décor à l’Envers.",
+      "author": "Cliente Google",
+      "role": "Avis Google",
+      "source": "google"
+    },
+    {
+      "quote": "Espace magnifique et chaleureux, parfait pour un shooting. Agnès est très à l’écoute des besoins créatifs.",
+      "author": "Cliente Google",
+      "role": "Avis Google",
+      "source": "google"
+    }
+  ]
+}

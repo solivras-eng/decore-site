@@ -1,12 +1,23 @@
 /**
- * Configuration site (une seule source pour Formspree + URL canonique).
- * 1) Créez un formulaire sur https://formspree.io et copiez l’ID (partie après /f/ dans l’URL).
- * 2) Remplacez formspreeId ci-dessous (ex. "xpzabcde" sans slash).
- * 3) Domaine production : gardez siteBaseUrl identique aux balises canonical / sitemap / robots
- *    (après branchement IONOS → Vercel, remplacez partout si l’URL change).
+ * Configuration site (une seule source pour Formspree + URL canonique + Google).
+ * 1) Formspree : https://formspree.io — ID après /f/
+ * 2) Domaine production : siteBaseUrl = canonical / sitemap / robots (sans slash final)
+ * 3) Google Business : collez les URL depuis business.google.com (fiche + lien « demander avis »)
  */
 window.DECOR_SITE = {
-  siteBaseUrl: 'https://www.decoralenvers.fr',
-  /** ID Formspree (segment après /f/) — synchronisé avec l’attribut action du formulaire contact */
+  siteBaseUrl: 'https://www.decoralenvers.com',
+  /** ID Formspree (segment après /f/) */
   formspreeId: 'xpqbkkoa',
+  /** Email de notification Formspree (référence — configurer aussi dans le tableau de bord) */
+  notificationEmail: 'contact@agnesbouche.com',
+  /**
+   * Fiche Google Maps / Profil Google (ex. https://g.page/... ou lien Maps).
+   * Laisser vide tant que non disponible — le lien footer n’apparaît pas.
+   */
+  googleBusinessUrl: '',
+  /**
+   * Lien « Laisser un avis » depuis Google Business (Demander des avis).
+   * Laisser vide pour masquer le bouton dédié.
+   */
+  googleReviewUrl: '',
 };

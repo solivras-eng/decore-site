@@ -1,55 +1,98 @@
 # Mise en ligne (GitHub + Vercel + IONOS)
 
-**Italiano (intro)** — Questa guida spiega come pubblicare il sito: repository GitHub, deploy su Vercel, dominio (es. IONOS) e modulo Formspree. Il repository ufficiale è nell’organizzazione **`solivras-eng`**, repo **`decore-site`**: [https://github.com/solivras-eng/decore-site](https://github.com/solivras-eng/decore-site). Per `git push` usa un account GitHub con permesso di scrittura su quell’org (non un altro utente senza accesso, altrimenti errore 403). Per panoramica del codice vedi anche [`README.md`](README.md) e [`STRUCTURE.md`](STRUCTURE.md).
+**Italiano (intro)** — Guida per pubblicare il sito: repository GitHub, deploy Vercel, dominio IONOS (`decoralenvers.com`), Formspree e Google Business. Repository: [solivras-eng/decore-site](https://github.com/solivras-eng/decore-site).
 
 ---
 
-Ce dossier `decore-site` est la **racine du site** : tout le HTML, CSS, JS et les images sous `assets/` (y compris `assets/gallery/`) doivent être versionnés et déployés ensemble.
+Ce dossier `decore-site` est la **racine du site** : HTML, CSS, JS et images sous `assets/`.
 
 ## 1. Dépôt GitHub
 
-1. Créez un dépôt vide sur GitHub.
-2. En local, à la racine de **ce dossier** (`decore-site`) :
+```bash
+git clone https://github.com/solivras-eng/decore-site.git
+cd decore-site
+# … modifications …
+git push -u origin main
+```
 
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial site statique Le Décor à l'Envers"
-   git branch -M main
-   git remote add origin https://github.com/solivras-eng/decore-site.git
-   git push -u origin main
-   ```
-
-Les photos dans `assets/gallery/` peuvent être lourdes ; si Git refuse le push, utilisez [Git LFS](https://git-lfs.com) pour `*.jpg` / `*.JPG` / `*.png`, ou compressez les images avant commit.
+Utilisez un compte avec droits d’écriture sur l’org **solivras-eng** (sinon erreur 403).
 
 ## 2. Vercel
 
-1. Connectez-vous sur [vercel.com](https://vercel.com) avec GitHub.
-2. **Add New Project** → importez le dépôt.
-3. **Root Directory** : laissez `/` si le repo ne contient que `decore-site` ; si le repo est le dossier parent, indiquez `decore-site`.
-4. **Framework Preset** : **Other** (aucun build ; site statique HTML/CSS/JS).
-5. Déployez : l’URL `*.vercel.app` sert de prévisualisation.
+1. [vercel.com](https://vercel.com) → import du dépôt.
+2. **Framework Preset** : **Other** (site statique).
+3. URL de prévisualisation : `*.vercel.app`.
 
 ## 3. Domaine IONOS → Vercel
 
-1. Dans Vercel : **Project → Settings → Domains** → ajoutez votre domaine (ex. `www.exemple.fr` et/ou apex `exemple.fr`).
-2. Suivez les instructions Vercel (souvent **CNAME** `www` → `cname.vercel-dns.com` ; pour l’apex, enregistrements **A** indiqués par Vercel ou **ALIAS** selon ce qu’IONOS propose).
-3. Dans le panneau DNS IONOS, créez/modifiez les enregistrements ; la propagation peut prendre jusqu’à 48 h.
-4. HTTPS est géré par Vercel une fois le domaine validé.
+**Domaine de production** : `https://www.decoralenvers.com`
 
-## 4. Quand l’URL canonique change
+1. Vercel → **Project → Settings → Domains** → `www.decoralenvers.com` + `decoralenvers.com`.
+2. DNS IONOS : **CNAME** `www` → `cname.vercel-dns.com` ; apex → enregistrements **A** Vercel ou redirection vers `www`.
+3. HTTPS automatique après validation.
 
-Alignez la même base **sans slash final** partout :
+## 4. URL canonique (`.com`)
+
+Une seule base **sans slash final** :
 
 - [`config.js`](config.js) → `siteBaseUrl`
-- Toutes les balises `link rel="canonical"`, `hreflang`, `og:url`, `twitter:image` (URLs absolues), blocs JSON-LD dans `index.html` et `en/index.html`
-- [`sitemap.xml`](sitemap.xml) et [`robots.txt`](robots.txt) (ligne `Sitemap:`)
+- Balises `canonical`, `hreflang`, `og:url`, JSON-LD
+- [`sitemap.xml`](sitemap.xml), [`robots.txt`](robots.txt)
 
-Recherche globale dans le projet : `https://www.decoralenvers.fr` → votre nouvelle URL.
+## 5. Formulaire Formspree
 
-## 5. Formulaire (Formspree)
+**ID** : `xpqbkkoa` (dans `config.js` et pages contact).
 
-1. Dans le tableau de bord Formspree : formulaire lié à l’ID dans `config.js` / pages contact.
-2. Ajoutez le domaine Vercel (preview + production) aux domaines autorisés si demandé.
-3. Vérifiez l’e-mail de notification (ex. `contact@agnesbouche.com`).
-4. Testez un envoi depuis l’URL de production.
+### Checklist tableau de bord [formspree.io](https://formspree.io)
+
+1. **Notifications** → email : `contact@agnesbouche.com`
+2. **Allowed domains** (si demandé) :
+   - `www.decoralenvers.com`
+   - `decoralenvers.com`
+   - votre `*.vercel.app` (tests)
+3. **Test production** :
+   - [contact.html](https://www.decoralenvers.com/contact.html) (FR)
+   - [en/contact.html](https://www.decoralenvers.com/en/contact.html) (EN)
+   - Vérifier : message de succès sur la page, entrée dans **Submissions**, mail reçue (spam inclus)
+
+Le site envoie `_replyto` depuis l’email du visiteur pour répondre directement depuis votre boîte mail.
+
+## 6. Google Business (gratuit, sans widget payant)
+
+### Sur Google
+
+1. [business.google.com](https://business.google.com) → fiche **Le Décor à l'Envers**.
+2. **Site web** : `https://www.decoralenvers.com`
+3. Copier :
+   - URL de la fiche (Maps / g.page)
+   - Lien **Demander des avis** / « Get more reviews »
+
+### Dans le code ([`config.js`](config.js))
+
+```js
+googleBusinessUrl: 'https://…',  // fiche Google
+googleReviewUrl: 'https://…',    // lien « laisser un avis »
+```
+
+Tant que ces champs sont vides, les liens Google n’apparaissent pas (footer, témoignages).
+
+### Avis sur le site (sans API payante)
+
+- Fichier [`assets/data/reviews.json`](assets/data/reviews.json) : copiez manuellement 3–6 avis Google (texte, auteur).
+- Pas d’import automatique (évite API Google facturée et widgets tiers).
+
+### Search Console (recommandé)
+
+1. [search.google.com/search-console](https://search.google.com/search-console)
+2. Propriété `https://www.decoralenvers.com`
+3. Soumettre `https://www.decoralenvers.com/sitemap.xml`
+
+## 7. Vérification post-deploy
+
+| Test | URL / action |
+|------|----------------|
+| Home FR/EN | `/` et `/en/` |
+| Form | Envoi test contact FR + EN |
+| Sitemap | `/sitemap.xml` (toutes URLs en `.com`) |
+| JSON-LD | [Rich Results Test](https://search.google.com/test/rich-results) sur la home |
+| Google links | Après remplissage `config.js`, lien « Google » dans le footer |

@@ -10,7 +10,7 @@ Il codice vive sotto l’organizzazione **`solivras-eng`**, repository **`decore
 
 ### Email di contatto sul sito
 
-L’indirizzo pubblico **contact@agnesbouche.com** è quello usato in footer, pagine legali (ove applicabile) e nello schema JSON-LD. Nei footer delle pagine principali compare anche una breve **nota** (classe `footer-email-note`) che spiega che le richieste legate al dominio **decoralenvers.fr** sono gestite da quella casella.
+L’indirizzo pubblico **contact@agnesbouche.com** è quello usato in footer, pagine legali (ove applicabile) e nello schema JSON-LD. Nei footer delle pagine principali compare anche una breve **nota** (classe `footer-email-note`) che spiega che le richieste legate al dominio **decoralenvers.com** sono gestite da quella casella.
 
 ## Anteprima locale
 
@@ -47,8 +47,8 @@ decore-site/
 
 ## Configurazione rapida
 
-- **[`config.js`](config.js)** — `siteBaseUrl` (URL canonico del sito) e `formspreeId` per il modulo contatti. Devono coincidere con i `action` del form in `contact.html` / `en/contact.html`.
-- **Dominio** — Se cambi dominio, aggiorna anche canonical, Open Graph, JSON-LD, `sitemap.xml` e `robots.txt` (istruzioni in [`DEPLOY.md`](DEPLOY.md) sezione 4).
+- **[`config.js`](config.js)** — `siteBaseUrl` (`https://www.decoralenvers.com`), `formspreeId`, email notifiche, URL Google Business (`googleBusinessUrl`, `googleReviewUrl`).
+- **Dominio** — Production : **decoralenvers.com**. Vedi [`DEPLOY.md`](DEPLOY.md) pour Formspree, Google Business et Search Console.
 
 ## Pubblicazione
 
