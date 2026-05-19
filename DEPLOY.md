@@ -83,22 +83,52 @@ googleMaps: { lat, lng, zoom, embedUrl: '' },  // carte contact + le-loft
 - **`googleReviewUrl`** : lien **Demander des avis** (pas la fiche Maps) — voir ci-dessous.
 - Carte intégrée sur `contact.html` et `le-loft.html` (iframe sans clé API).
 
-Tant que `googleReviewUrl` est vide, le bouton « Laisser un avis » sur témoignages reste masqué.
+**Statut (mai 2026)** : `googleReviewUrl` configuré — bouton avis actif sur [temoignages.html](temoignages.html).
 
 ### Avis sur le site (sans API payante)
 
-- Fichier [`assets/data/reviews.json`](assets/data/reviews.json) : copiez manuellement 3–6 avis Google (texte, auteur).
-- Pas d’import automatique (évite API Google facturée et widgets tiers).
+1. Ouvrez votre fiche [Google Business](https://business.google.com) → section **Avis**.
+2. Copiez le **texte** et le **prénom** de 3 à 6 avis récents (avec autorisation implicite via publication publique).
+3. Éditez [`assets/data/reviews.json`](assets/data/reviews.json) :
 
-### Search Console (recommandé)
+```json
+{
+  "reviews": [
+    {
+      "quote": "Texte de l'avis…",
+      "author": "Marie D.",
+      "role": "Mariage — avis Google",
+      "source": "google"
+    }
+  ]
+}
+```
 
-1. [search.google.com/search-console](https://search.google.com/search-console)
-2. Propriété `https://www.decoralenvers.com`
-3. Soumettre `https://www.decoralenvers.com/sitemap.xml`
+4. Commit + push. Le carousel sur témoignages FR/EN se met à jour automatiquement (`main.js`).
+
+Pas d’import automatique (évite API Google facturée).
+
+### Images galerie (variantes responsive)
+
+```bash
+./scripts/optimize-gallery.sh          # génère -640 et -1280 (macOS sips)
+python3 scripts/add-gallery-srcset.py  # après ajout d’images, met à jour le HTML
+```
+
+Voir [`scripts/README.md`](scripts/README.md).
+
+### Google Search Console (recommandé, manuel)
+
+1. [search.google.com/search-console](https://search.google.com/search-console) → **Ajouter une propriété**.
+2. Choisir **Préfixe d’URL** : `https://www.decoralenvers.com`
+3. **Vérification** : balise HTML (copier dans `<head>` de `index.html` temporairement) ou DNS TXT chez IONOS.
+4. Une fois validé : **Sitemaps** → envoyer `https://www.decoralenvers.com/sitemap.xml`
+5. **Inspection d’URL** → tester la home et `contact.html` pour demander l’indexation.
+6. Surveiller **Couverture** et **Expérience** après 1–2 semaines.
 
 ## 7. Lighthouse mobile
 
-Optimisations intégrées dans [`styles.css`](styles.css) : `content-visibility` sur les sections hors hero, grain allégé sur mobile, images galerie en `loading="lazy"` + dimensions, hero en `preload`.
+Optimisations : `content-visibility`, fonts async, hero preload, variantes JPEG `-640`/`-1280` + `srcset` sur home et galerie ([`styles.css`](styles.css), [`scripts/`](scripts/)).
 
 **Audit local** (Chrome Lighthouse ou CLI) :
 
@@ -122,5 +152,6 @@ Voir aussi [`docs/lighthouse-mobile.md`](docs/lighthouse-mobile.md) après chaqu
 | Mentions légales | Directrice + adresse ; SIREN dans `config.js` si dispo |
 | Sitemap | `/sitemap.xml` (toutes URLs en `.com`) |
 | JSON-LD | [Rich Results Test](https://search.google.com/test/rich-results) sur la home |
-| Google links | Après remplissage `config.js`, lien « Google » dans le footer |
-| Photo Agnès | Remplacer le placeholder SVG sur `l-artiste.html` / `en/the-artist.html` |
+| Google / avis | Footer Google, bouton avis témoignages, mappa contact |
+| Images | Home/galerie chargent `-640` sur mobile (srcset) |
+| Photo Agnès | Déposer `assets/photos/agnes.jpg` + `artistPhoto` dans `config.js` |

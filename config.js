@@ -32,6 +32,11 @@ window.DECOR_SITE = {
    * Informations légales (mentions légales, confidentialité).
    * Complétez siren / siret / legalForm / tva dès que vous les avez (Kbis, URSSAF, etc.).
    */
+  /**
+   * Photo Agnès sur l-artiste.html — déposer le fichier puis décommenter :
+   * artistPhoto: 'assets/photos/agnes.jpg',
+   */
+  // artistPhoto: '',
   legal: {
     tradeName: "Le Décor à l'Envers",
     publicationDirector: 'Agnès Bouche',
