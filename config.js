@@ -45,8 +45,8 @@ window.DECOR_SITE = {
     city: 'Bagnolet',
     country: 'France',
     legalForm: '',
-    siren: '',
-    siret: '',
+    siren: '390586386',
+    siret: '39058638600059',
     tva: '',
   },
 };
