@@ -21,8 +21,9 @@ Pages utiles à tester en plus : `/galerie.html`, `/contact.html`.
 | CSS | `content-visibility: auto` sur sections hors hero (mobile) |
 | Effet grain | désactivé sur mobile (moins de repaint) |
 | Hero | `preload` image LCP, `fetchpriority="high"` |
+| Galerie | Variantes `-640` / `-1280`, `srcset` + `sizes` (home, galerie) |
 | Galerie | `loading="lazy"`, `width` / `height`, `decoding="async"` |
-| Polices | Google Fonts avec `display=swap` |
+| Polices | Google Fonts async (`media="print" onload`) |
 | Assets | cache long via `vercel.json` |
 
 ## Cibles indicatives
@@ -37,12 +38,12 @@ Pages utiles à tester en plus : `/galerie.html`, `/contact.html`.
 ## Prochaines améliorations (optionnel)
 
 - Remplacer la photo placeholder sur `l-artiste.html` par une image WebP optimisée (`width`/`height` fixes).
-- Renseigner `googleBusinessUrl` dans `config.js` (lien Maps, pas d’impact Lighthouse direct).
+- Réduire encore le poids des originaux galerie (option : ne pas servir les JPG 3000 px si `-1280` suffit).
 - Compléter `legal.siren` / `legal.siret` dans `config.js` si vous souhaitez les afficher sur les mentions légales.
 
 ## Historique des scores
 
 | Date | URL | Perf | A11y | BP | SEO | Notes |
 |------|-----|------|------|-----|-----|-------|
-| 2026-05-19 (prod, avant déploiement optimisations) | `/` | 67 | 96 | 96 | 100 | LCP ~7,3 s ; JPEG galerie très lourds ; fonts bloquantes |
-| _après déploiement_ | `/` | — | — | — | — | fonts async, hero preload mobile, content-visibility |
+| 2026-05-19 (avant variantes images) | `/` | 67 | 96 | 96 | 100 | LCP ~7,3 s ; JPEG galerie très lourds ; fonts bloquantes |
+| 2026-05-19 (après commit `7a0f511`) | `/` | 70 | 96 | 96 | 100 | LCP ~5,5 s ; srcset galerie ; fonts non bloquantes ; ~555 KiB images encore optimisables |
