@@ -41,11 +41,11 @@ Une seule base **sans slash final** :
 
 ## 5. Formulaire Formspree
 
-**ID** : `xpqbkkoa` (dans `config.js` et pages contact).
+**ID** : `xgoqvjlz` (dans `config.js` et pages contact).
 
 ### Checklist tableau de bord [formspree.io](https://formspree.io)
 
-1. **Notifications** → email : `contact@agnesbouche.com`
+1. **Notifications** → email : `vingthuitsept@gmail.com` (réception Formspree uniquement ; le site affiche toujours `contact@agnesbouche.com`)
 2. **Allowed domains** (si demandé) :
    - `www.decoralenvers.com`
    - `decoralenvers.com`

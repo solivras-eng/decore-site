@@ -7,9 +7,14 @@
 window.DECOR_SITE = {
   siteBaseUrl: 'https://www.decoralenvers.com',
   /** ID Formspree (segment après /f/) */
-  formspreeId: 'xpqbkkoa',
-  /** Email de notification Formspree (référence — configurer aussi dans le tableau de bord) */
-  notificationEmail: 'contact@agnesbouche.com',
+  formspreeId: 'xgoqvjlz',
+  /** Email affiché sur le site, mentions légales et schema (contact public) */
+  contactEmail: 'contact@agnesbouche.com',
+  /**
+   * Réception des soumissions Formspree uniquement — à configurer sur formspree.io
+   * (formulaire xgoqvjlz → Notifications). Ne pas afficher sur le site.
+   */
+  formspreeNotificationEmail: 'vingthuitsept@gmail.com',
   /**
    * Fiche Google Maps / Profil Google (ex. https://g.page/... ou lien Maps).
    * Laisser vide tant que non disponible — le lien footer n’apparaît pas.
