@@ -14,12 +14,20 @@ window.DECOR_SITE = {
    * Fiche Google Maps / Profil Google (ex. https://g.page/... ou lien Maps).
    * Laisser vide tant que non disponible — le lien footer n’apparaît pas.
    */
-  googleBusinessUrl: '',
+  googleBusinessUrl:
+    'https://www.google.com/maps/place/D%C3%A9cor+%C3%A0+l%27Envers+-+Maison+d%27H%C3%B4tes+et+espace+%C3%A9v%C3%A9nementiel/@48.8567105,2.4163807,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66d55e7574665:0x4ed8f1178a2be7a!8m2!3d48.8567105!4d2.4163807!16s%2Fg%2F11wh6g34_s',
   /**
    * Lien « Laisser un avis » depuis Google Business (Demander des avis).
    * Laisser vide pour masquer le bouton dédié.
    */
   googleReviewUrl: '',
+  /** Carte intégrée (iframe sans clé API). Optionnel : googleMaps.embedUrl depuis « Intégrer une carte ». */
+  googleMaps: {
+    lat: 48.8567105,
+    lng: 2.4163807,
+    zoom: 16,
+    embedUrl: '',
+  },
   /**
    * Informations légales (mentions légales, confidentialité).
    * Complétez siren / siret / legalForm / tva dès que vous les avez (Kbis, URSSAF, etc.).

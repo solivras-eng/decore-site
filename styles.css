@@ -1406,6 +1406,40 @@ body.cursor-dark .cursor-dot  { background: #fff; }
   .form-card     { padding: 2rem 1.5rem; }
 }
 
+/* ─── GOOGLE MAP EMBED ───────────────────────────────── */
+.google-map-block { width: 100%; }
+.google-map-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  min-height: 280px;
+  max-height: 480px;
+  background: var(--navy-mid);
+  border: 1px solid rgba(186, 117, 23, 0.25);
+}
+.google-map-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.google-map-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: var(--font-body);
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: var(--rouille);
+}
+.google-map-link:hover { text-decoration: underline; }
+.section--navy .google-map-link { color: var(--bleu-clair); }
+.google-map-times {
+  margin-top: 1.5rem;
+  padding: 1.5rem 1.75rem;
+  border: 1px solid rgba(186, 117, 23, 0.25);
+}
+
 /* ─── LIGHTHOUSE / MOBILE PERF ───────────────────────── */
 @media (max-width: 768px) {
   .section:not(.hero) {

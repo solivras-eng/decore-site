@@ -69,6 +69,51 @@ function injectGoogleLinks() {
   });
 }
 
+function buildMapsEmbedUrl() {
+  const cfg = siteConfig();
+  const maps = cfg.googleMaps || {};
+  const custom = String(maps.embedUrl || '').trim();
+  if (custom) return custom;
+  const lat = maps.lat;
+  const lng = maps.lng;
+  if (lat == null || lng == null) return '';
+  const zoom = maps.zoom != null ? maps.zoom : 16;
+  const q = encodeURIComponent(lat + ',' + lng);
+  const hl = isEnglishPage() ? 'en' : 'fr';
+  return 'https://maps.google.com/maps?q=' + q + '&hl=' + hl + '&z=' + zoom + '&output=embed';
+}
+
+function injectGoogleMaps() {
+  const embedSrc = buildMapsEmbedUrl();
+  const biz = String(siteConfig().googleBusinessUrl || '').trim();
+  const isEn = isEnglishPage();
+  if (!embedSrc) return;
+
+  document.querySelectorAll('[data-google-map]').forEach(wrap => {
+    if (wrap.querySelector('iframe')) return;
+    const iframe = document.createElement('iframe');
+    iframe.src = embedSrc;
+    iframe.setAttribute('loading', 'lazy');
+    iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+    iframe.setAttribute(
+      'title',
+      isEn
+        ? "Map — Le Décor à l'Envers, Bagnolet"
+        : "Carte — Le Décor à l'Envers, Bagnolet"
+    );
+    iframe.setAttribute('allowfullscreen', '');
+    wrap.appendChild(iframe);
+
+    const linkEl = wrap.parentElement && wrap.parentElement.querySelector('[data-google-map-link]');
+    if (linkEl && biz) {
+      linkEl.href = biz;
+      linkEl.target = '_blank';
+      linkEl.rel = 'noopener noreferrer';
+      linkEl.hidden = false;
+    }
+  });
+}
+
 function patchJsonLdSameAs() {
   const biz = String(siteConfig().googleBusinessUrl || '').trim();
   if (!biz) return;
@@ -108,6 +153,7 @@ async function loadGoogleReviews() {
 document.addEventListener('DOMContentLoaded', async () => {
   await loadGoogleReviews();
   injectGoogleLinks();
+  injectGoogleMaps();
   patchJsonLdSameAs();
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

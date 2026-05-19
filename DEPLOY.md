@@ -74,11 +74,16 @@ Le site envoie `_replyto` depuis l’email du visiteur pour répondre directemen
 ### Dans le code ([`config.js`](config.js))
 
 ```js
-googleBusinessUrl: 'https://…',  // fiche Google
-googleReviewUrl: 'https://…',    // lien « laisser un avis »
+googleBusinessUrl: 'https://…',  // fiche Google (Maps)
+googleReviewUrl: 'https://…',    // lien « Demander des avis » uniquement
+googleMaps: { lat, lng, zoom, embedUrl: '' },  // carte contact + le-loft
 ```
 
-Tant que ces champs sont vides, les liens Google n’apparaissent pas (footer, témoignages).
+- **`googleBusinessUrl`** : lien **Partager** de la fiche Maps (déjà renseigné en prod).
+- **`googleReviewUrl`** : lien **Demander des avis** (pas la fiche Maps) — voir ci-dessous.
+- Carte intégrée sur `contact.html` et `le-loft.html` (iframe sans clé API).
+
+Tant que `googleReviewUrl` est vide, le bouton « Laisser un avis » sur témoignages reste masqué.
 
 ### Avis sur le site (sans API payante)
 
