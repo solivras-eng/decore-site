@@ -12,7 +12,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap"></noscript>
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
@@ -61,16 +62,15 @@
 
       <section>
         <h2 style="font-family:var(--font-display); font-size:1.35rem; color:var(--navy); margin-bottom:0.75rem;">1. Site publisher</h2>
-        <p>The website <strong>decoralenvers.com</strong> (the “Site”) is published by <strong>Le Décor à l'Envers</strong>, an event and reception venue.</p>
-        <p>Contact: <a href="mailto:contact@agnesbouche.com" style="color:var(--rouille);">contact@agnesbouche.com</a></p>
-        <p>Full address provided on request — <strong>93170 Bagnolet</strong>, France.</p>
-        <p><strong>Legal identity:</strong> legal form, SIREN/SIRET, trade register and share capital — <em>complete here after verification with your adviser or registration documents.</em></p>
+        <p>The website <strong>decoralenvers.com</strong> (the “Site”) is published as part of <strong>Le Décor à l'Envers</strong>, a loft and event space hire business.</p>
+        <p><strong>Venue address:</strong> 18 rue Édouard Vaillant, 93170 Bagnolet, France</p>
+        <p><strong>Contact:</strong> <a href="mailto:contact@agnesbouche.com" style="color:var(--rouille);">contact@agnesbouche.com</a></p>
+        <p id="legal-identity-block"><strong>Operator identification:</strong> legal form, SIREN, SIRET and EU VAT number — available on written request or on your quote and venue hire agreement.</p>
       </section>
 
       <section>
         <h2 style="font-family:var(--font-display); font-size:1.35rem; color:var(--navy); margin-bottom:0.75rem;">2. Publication director</h2>
-        <p><strong>Publication director:</strong> the natural or legal person entitled to represent <strong>Le Décor à l'Envers</strong>, reachable at <a href="mailto:contact@agnesbouche.com" style="color:var(--rouille);">contact@agnesbouche.com</a>.</p>
-        <p><em>If your legal status requires a named individual (e.g. managing director), add the name here after advice from your counsel.</em></p>
+        <p><strong>Publication director:</strong> <span id="legal-director-name">Agnès Bouche</span>, founder and operator, reachable at <a href="mailto:contact@agnesbouche.com" style="color:var(--rouille);">contact@agnesbouche.com</a>.</p>
       </section>
 
       <section>
@@ -107,6 +107,7 @@
 </footer>
 
 <script src="../config.js"></script>
+<script src="../legal-fill.js"></script>
 <script src="../main.js"></script>
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 </body>

@@ -55,7 +55,11 @@ Une seule base **sans slash final** :
    - [en/contact.html](https://www.decoralenvers.com/en/contact.html) (EN)
    - Vérifier : message de succès sur la page, entrée dans **Submissions**, mail reçue (spam inclus)
 
+**Statut (mai 2026)** : les **Submissions Formspree** sont confirmées opérationnelles en production.
+
 Le site envoie `_replyto` depuis l’email du visiteur pour répondre directement depuis votre boîte mail.
+
+**Mentions légales** : adresse 18 rue Édouard Vaillant, directrice Agnès Bouche. Complétez `legal.siren` / `legal.siret` dans `config.js` (Kbis).
 
 ## 6. Google Business (gratuit, sans widget payant)
 
@@ -87,12 +91,31 @@ Tant que ces champs sont vides, les liens Google n’apparaissent pas (footer, t
 2. Propriété `https://www.decoralenvers.com`
 3. Soumettre `https://www.decoralenvers.com/sitemap.xml`
 
-## 7. Vérification post-deploy
+## 7. Lighthouse mobile
+
+Optimisations intégrées dans [`styles.css`](styles.css) : `content-visibility` sur les sections hors hero, grain allégé sur mobile, images galerie en `loading="lazy"` + dimensions, hero en `preload`.
+
+**Audit local** (Chrome Lighthouse ou CLI) :
+
+```bash
+npx lighthouse https://www.decoralenvers.com/ \
+  --only-categories=performance,accessibility,best-practices,seo \
+  --form-factor=mobile --screenEmulation.mobile \
+  --output=html --output-path=./lighthouse-mobile.html
+```
+
+Cibles indicatives : Performance ≥ 85, Accessibilité ≥ 90, SEO ≥ 90.
+
+Voir aussi [`docs/lighthouse-mobile.md`](docs/lighthouse-mobile.md) après chaque audit majeur.
+
+## 8. Vérification post-deploy
 
 | Test | URL / action |
 |------|----------------|
 | Home FR/EN | `/` et `/en/` |
-| Form | Envoi test contact FR + EN |
+| Form | Submissions Formspree OK (confirmé) |
+| Mentions légales | Directrice + adresse ; SIREN dans `config.js` si dispo |
 | Sitemap | `/sitemap.xml` (toutes URLs en `.com`) |
 | JSON-LD | [Rich Results Test](https://search.google.com/test/rich-results) sur la home |
 | Google links | Après remplissage `config.js`, lien « Google » dans le footer |
+| Photo Agnès | Remplacer le placeholder SVG sur `l-artiste.html` / `en/the-artist.html` |

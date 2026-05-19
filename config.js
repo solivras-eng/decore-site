@@ -20,4 +20,20 @@ window.DECOR_SITE = {
    * Laisser vide pour masquer le bouton dédié.
    */
   googleReviewUrl: '',
+  /**
+   * Informations légales (mentions légales, confidentialité).
+   * Complétez siren / siret / legalForm / tva dès que vous les avez (Kbis, URSSAF, etc.).
+   */
+  legal: {
+    tradeName: "Le Décor à l'Envers",
+    publicationDirector: 'Agnès Bouche',
+    addressLine: '18 rue Édouard Vaillant',
+    postalCode: '93170',
+    city: 'Bagnolet',
+    country: 'France',
+    legalForm: '',
+    siren: '',
+    siret: '',
+    tva: '',
+  },
 };

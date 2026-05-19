@@ -12,7 +12,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap"></noscript>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -61,16 +62,15 @@
 
       <section>
         <h2 style="font-family:var(--font-display); font-size:1.35rem; color:var(--navy); margin-bottom:0.75rem;">1. Éditeur du site</h2>
-        <p>Le site <strong>decoralenvers.com</strong> (ci-après « le Site ») est édité par <strong>Le Décor à l'Envers</strong>, lieu de réception et d'événements.</p>
-        <p>Contact : <a href="mailto:contact@agnesbouche.com" style="color:var(--rouille);">contact@agnesbouche.com</a></p>
-        <p>Localisation communiquée sur demande — <strong>93170 Bagnolet</strong>, France.</p>
-        <p><strong>Identité légale :</strong> forme juridique, numéro SIREN/SIRET, RCS et capital social — <em>à compléter ici ou en annexe après vérification avec votre conseil ou votre formalité d’immatriculation.</em></p>
+        <p>Le site <strong>decoralenvers.com</strong> (ci-après « le Site ») est édité dans le cadre de l'activité <strong>Le Décor à l'Envers</strong>, location de loft et d'espaces pour événements privés et professionnels.</p>
+        <p><strong>Adresse du lieu :</strong> 18 rue Édouard Vaillant, 93170 Bagnolet, France</p>
+        <p><strong>Contact :</strong> <a href="mailto:contact@agnesbouche.com" style="color:var(--rouille);">contact@agnesbouche.com</a></p>
+        <p id="legal-identity-block"><strong>Identification de l'exploitant :</strong> forme juridique, SIREN, SIRET et numéro de TVA intracommunautaire — communiqués sur demande écrite ou figurant sur le devis et le contrat de location.</p>
       </section>
 
       <section>
         <h2 style="font-family:var(--font-display); font-size:1.35rem; color:var(--navy); margin-bottom:0.75rem;">2. Directeur de la publication</h2>
-        <p><strong>Directrice de la publication :</strong> la personne physique ou morale ayant qualité pour représenter l'exploitation <strong>Le Décor à l'Envers</strong>, joignable à l'adresse <a href="mailto:contact@agnesbouche.com" style="color:var(--rouille);">contact@agnesbouche.com</a>.</p>
-        <p><em>Si votre statut juridique impose un nom nominatif (ex. gérante SARL), complétez cette ligne après validation par votre conseil.</em></p>
+        <p><strong>Directrice de la publication :</strong> <span id="legal-director-name">Agnès Bouche</span>, fondatrice et responsable de l'exploitation, joignable à <a href="mailto:contact@agnesbouche.com" style="color:var(--rouille);">contact@agnesbouche.com</a>.</p>
       </section>
 
       <section>
@@ -107,6 +107,7 @@
 </footer>
 
 <script src="config.js"></script>
+<script src="legal-fill.js"></script>
 <script src="main.js"></script>
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 </body>

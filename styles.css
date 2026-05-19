@@ -1405,3 +1405,15 @@ body.cursor-dark .cursor-dot  { background: #fff; }
   .pricing-card  { padding: 2rem 1.5rem; }
   .form-card     { padding: 2rem 1.5rem; }
 }
+
+/* ─── LIGHTHOUSE / MOBILE PERF ───────────────────────── */
+@media (max-width: 768px) {
+  .section:not(.hero) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 480px;
+  }
+  .grain {
+    opacity: 0.025;
+    animation: none;
+  }
+}
