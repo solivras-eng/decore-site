@@ -52,7 +52,7 @@
       name: biz.publicName || legal.tradeName || "Le Décor à l'Envers",
       description: desc || undefined,
       url: isEn ? base + '/en/' : base + '/',
-      email: cfg.notificationEmail || 'contact@agnesbouche.com',
+      email: cfg.contactEmail || 'contact@agnesbouche.com',
       address: postalAddress(),
       image: [
         base + '/assets/og-image.jpg',
