@@ -38,15 +38,25 @@ window.DECOR_SITE = {
    */
   // artistPhoto: '',
   legal: {
+    legalName: "LE DECOR DE L'ENVERS",
     tradeName: "Le Décor à l'Envers",
+    legalForm: 'Association déclarée',
     publicationDirector: 'Agnès Bouche',
     addressLine: '18 rue Édouard Vaillant',
     postalCode: '93170',
     city: 'Bagnolet',
     country: 'France',
-    legalForm: '',
     siren: '390586386',
     siret: '39058638600059',
     tva: '',
+  },
+  business: {
+    publicName: "Décor à l'Envers - Maison d'Hôtes et espace événementiel",
+    priceRange: '€€',
+    aggregateRating: { ratingValue: 5.0, reviewCount: 19 },
+    descriptionFr:
+      'Événements, espace créatif, maison d\'hôtes, activités artistiques et spectacle vivant à Bagnolet.',
+    descriptionEn:
+      'Events, creative space, guest house, artistic activities and live performance in Bagnolet.',
   },
 };

@@ -24,3 +24,11 @@ Adds `srcset` / `sizes` to gallery `<img>` tags in main HTML pages (run after `o
 ```bash
 python3 scripts/add-gallery-srcset.py
 ```
+
+## embed-reviews-html.py
+
+Embeds static review cards into `temoignages.html` and `en/temoignages.html` at the `<!-- REVIEWS-HTML -->` marker (crawlable HTML for SEO). Run after editing `assets/data/reviews.json`:
+
+```bash
+python3 scripts/embed-reviews-html.py
+```

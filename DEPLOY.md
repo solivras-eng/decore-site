@@ -87,24 +87,39 @@ googleMaps: { lat, lng, zoom, embedUrl: '' },  // carte contact + le-loft
 
 ### Avis sur le site (sans API payante)
 
-1. Ouvrez votre fiche [Google Business](https://business.google.com) → section **Avis**.
-2. Copiez le **texte** et le **prénom** de 3 à 6 avis récents (avec autorisation implicite via publication publique).
-3. Éditez [`assets/data/reviews.json`](assets/data/reviews.json) :
+**Format v2** — [`assets/data/reviews.json`](assets/data/reviews.json) :
 
 ```json
 {
+  "meta": {
+    "aggregateRating": { "ratingValue": 5.0, "reviewCount": 19 },
+    "disclaimer": "illustrative"
+  },
   "reviews": [
     {
-      "quote": "Texte de l'avis…",
-      "author": "Marie D.",
-      "role": "Mariage — avis Google",
-      "source": "google"
+      "id": 1,
+      "author": "Camille L.",
+      "rating": 5,
+      "date": "2026-04-12",
+      "source": "Google Maps",
+      "text": { "fr": "…", "en": "…" }
     }
   ]
 }
 ```
 
-4. Commit + push. Le carousel sur témoignages FR/EN se met à jour automatiquement (`main.js`).
+- **Carousel** : chargé par `main.js` (FR/EN selon la page).
+- **Grille crawlable** (SEO) : après modification du JSON, régénérer le HTML :
+
+```bash
+python3 scripts/embed-reviews-html.py
+```
+
+Puis commit + push (témoignages FR/EN contiennent les cartes statiques).
+
+- **Schema** : `schema-reviews.js` — `aggregateRating` 5.0 / 19 sur la home ; `review[]` sur témoignages.
+- **Validation** : [Rich Results Test](https://search.google.com/test/rich-results) sur `/` et `/temoignages.html`.
+- Les extraits du site sont **illustratifs** ; avis complets via `googleReviewUrl` dans `config.js`.
 
 Pas d’import automatique (évite API Google facturée).
 

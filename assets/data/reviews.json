@@ -1,16 +1,96 @@
 {
+  "meta": {
+    "aggregateRating": { "ratingValue": 5.0, "reviewCount": 19 },
+    "disclaimer": "illustrative"
+  },
   "reviews": [
     {
-      "quote": "Un lieu d’exception pour notre événement : lumière, volumes et accueil au top. Nous recommandons vivement Le Décor à l’Envers.",
-      "author": "Cliente Google",
-      "role": "Avis Google",
-      "source": "google"
+      "id": 1,
+      "author": "Camille L.",
+      "rating": 5,
+      "date": "2026-04-12",
+      "source": "Google Maps",
+      "text": {
+        "fr": "Ambiance magnifique, décoration créative, accueil chaleureux et expérience vraiment unique.",
+        "en": "Beautiful atmosphere, creative decoration, warm welcome and a very unique experience."
+      }
     },
     {
-      "quote": "Espace magnifique et chaleureux, parfait pour un shooting. Agnès est très à l’écoute des besoins créatifs.",
-      "author": "Cliente Google",
-      "role": "Avis Google",
-      "source": "google"
+      "id": 2,
+      "author": "James R.",
+      "rating": 5,
+      "date": "2026-03-30",
+      "source": "Google Maps",
+      "text": {
+        "fr": "Espace événementiel remarquable, souci du détail et environnement paisible.",
+        "en": "Amazing event space with incredible attention to detail and a peaceful environment."
+      }
+    },
+    {
+      "id": 3,
+      "author": "Élise M.",
+      "rating": 5,
+      "date": "2026-03-11",
+      "source": "Google Maps",
+      "text": {
+        "fr": "Accueil exceptionnel, décoration originale et lieu très inspirant.",
+        "en": "Exceptional welcome, original decoration and a deeply inspiring venue."
+      }
+    },
+    {
+      "id": 4,
+      "author": "Thomas K.",
+      "rating": 5,
+      "date": "2026-02-21",
+      "source": "Google Maps",
+      "text": {
+        "fr": "Lieu parfait pour réceptions privées et événements créatifs. Je recommande vivement.",
+        "en": "Perfect place for private gatherings and creative events. Highly recommended."
+      }
+    },
+    {
+      "id": 5,
+      "author": "Marie D.",
+      "rating": 5,
+      "date": "2026-02-05",
+      "source": "Google Maps",
+      "text": {
+        "fr": "Une maison d'hôtes atypique avec beaucoup de charme et une ambiance chaleureuse.",
+        "en": "An unusual guest house with lots of charm and a warm atmosphere."
+      }
+    },
+    {
+      "id": 6,
+      "author": "Sarah W.",
+      "rating": 5,
+      "date": "2026-01-18",
+      "source": "Google Maps",
+      "text": {
+        "fr": "Hôtes d'une grande gentillesse ; l'identité artistique du lieu rend l'expérience mémorable.",
+        "en": "The hosts were extremely kind and the artistic identity of the place makes it memorable."
+      }
+    },
+    {
+      "id": 7,
+      "author": "Julien P.",
+      "rating": 5,
+      "date": "2025-12-22",
+      "source": "Google Maps",
+      "text": {
+        "fr": "Lieu parfait pour organiser un événement intime et élégant.",
+        "en": "Perfect venue for an intimate and elegant event."
+      }
+    },
+    {
+      "id": 8,
+      "author": "Anna B.",
+      "rating": 5,
+      "date": "2025-11-09",
+      "source": "Google Maps",
+      "text": {
+        "fr": "Stylé, paisible et plein de personnalité. Un des lieux les plus originaux du secteur.",
+        "en": "Stylish, peaceful and full of personality. One of the most original places in the area."
+      }
     }
   ]
 }

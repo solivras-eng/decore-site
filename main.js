@@ -127,6 +127,31 @@ function patchJsonLdSameAs() {
   } catch (_) { /* ignore */ }
 }
 
+function reviewQuote(r) {
+  if (r.quote) return r.quote;
+  const t = r.text || {};
+  if (typeof t === 'string') return t;
+  return isEnglishPage() ? (t.en || t.fr || '') : (t.fr || t.en || '');
+}
+
+function formatReviewRole(r) {
+  const isEn = isEnglishPage();
+  const monthsFr = ['', 'janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+  const monthsEn = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  let dateLabel = '';
+  if (r.date) {
+    const p = String(r.date).split('-');
+    if (p.length === 3) {
+      const y = p[0];
+      const m = parseInt(p[1], 10);
+      const d = p[2];
+      dateLabel = isEn ? `${monthsEn[m]} ${d}, ${y}` : `${d} ${monthsFr[m]} ${y}`;
+    }
+  }
+  const src = r.source || 'Google Maps';
+  return dateLabel ? `${src} · ${dateLabel}` : (isEn ? 'Google review' : 'Avis Google');
+}
+
 async function loadGoogleReviews() {
   const stores = document.querySelectorAll('[data-testimonial-store]');
   if (!stores.length) return;
@@ -136,14 +161,18 @@ async function loadGoogleReviews() {
     const data = await res.json();
     const reviews = Array.isArray(data.reviews) ? data.reviews : [];
     stores.forEach(store => {
+      while (store.firstChild) store.removeChild(store.firstChild);
       reviews.forEach(r => {
-        if (!r.quote) return;
+        const quote = reviewQuote(r);
+        if (!quote) return;
         const div = document.createElement('div');
         div.setAttribute('data-testimonial', '');
-        div.dataset.quote = r.quote;
+        div.dataset.quote = quote;
         div.dataset.author = r.author || '';
-        div.dataset.role = r.role || (isEnglishPage() ? 'Google review' : 'Avis Google');
-        if (r.source) div.dataset.source = r.source;
+        div.dataset.role = formatReviewRole(r);
+        div.dataset.source = 'google';
+        if (r.rating != null) div.dataset.rating = String(r.rating);
+        if (r.date) div.dataset.date = r.date;
         store.appendChild(div);
       });
     });
@@ -281,10 +310,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     let current = 0;
 
-    const formatRole = t => {
-      const role = t.dataset.role || '';
-      if (t.dataset.source !== 'google') return role;
-      return isEnglishPage() ? 'Google review' : 'Avis Google';
+    let starsEl = wrap.querySelector('.testimonial-stars');
+    if (!starsEl) {
+      starsEl = document.createElement('div');
+      starsEl.className = 'testimonial-stars';
+      wrap.insertBefore(starsEl, quoteEl);
+    }
+
+    const renderStars = rating => {
+      const n = Math.max(0, Math.min(5, parseInt(rating, 10) || 0));
+      if (!n) {
+        starsEl.textContent = '';
+        starsEl.removeAttribute('aria-label');
+        return;
+      }
+      starsEl.textContent = '★'.repeat(n) + '☆'.repeat(5 - n);
+      starsEl.setAttribute(
+        'aria-label',
+        isEnglishPage() ? `${n} out of 5 stars` : `${n} sur 5`
+      );
     };
 
     const show = idx => {
@@ -295,7 +339,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       setTimeout(() => {
         quoteEl.textContent = t.dataset.quote;
         authorEl.textContent = t.dataset.author;
-        if (roleEl) roleEl.textContent = formatRole(t);
+        if (roleEl) roleEl.textContent = t.dataset.role || '';
+        renderStars(t.dataset.rating);
         quoteEl.style.opacity = '1';
         authorEl.style.opacity = '1';
       }, 280);

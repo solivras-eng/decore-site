@@ -1406,6 +1406,70 @@ body.cursor-dark .cursor-dot  { background: #fff; }
   .form-card     { padding: 2rem 1.5rem; }
 }
 
+/* ─── REVIEWS GRID + STARS ───────────────────────────── */
+.testimonial-stars {
+  display: block;
+  margin: 0.5rem 0 1rem;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  color: var(--rouille);
+  line-height: 1;
+}
+.review-grid-inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.review-card {
+  padding: 1.75rem;
+  background: var(--sable);
+  border: 1px solid rgba(186, 117, 23, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.review-stars {
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  color: var(--rouille);
+}
+.review-card-quote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--navy);
+}
+.review-card-quote p {
+  margin: 0;
+}
+.review-card-meta {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.review-card-author {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-style: normal;
+  color: var(--navy);
+  font-weight: 500;
+}
+.review-card-date {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--gris);
+  opacity: 0.85;
+}
+@media (max-width: 640px) {
+  .review-grid-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ─── GOOGLE MAP EMBED ───────────────────────────────── */
 .google-map-block { width: 100%; }
 .google-map-wrap {

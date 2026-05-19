@@ -344,23 +344,7 @@
     </div>
 
     <!-- Data store (hidden) -->
-    <div style="display:none;" data-testimonial-store>
-      <div data-testimonial
-        data-quote="An absolutely exceptional setting. The light, the volume, the atmosphere… everything was perfect for our seminar. Agnès is a remarkable host, attentive to every detail."
-        data-author="Sophie M."
-        data-role="Directrice Marketing, Paris">
-      </div>
-      <div data-testimonial
-        data-quote="We celebrated our wedding at Le Décor à l'Envers and our guests still talk about it. A living, warm, unique place — exactly what we were looking for."
-        data-author="Thomas & Julie"
-        data-role="Married in 2024">
-      </div>
-      <div data-testimonial
-        data-quote="For our collection launch we needed a space worthy of our brand. The loft delivered character, light and flexibility — we fell in love with it."
-        data-author="Raphaëlle D."
-        data-role="Directrice Artistique">
-      </div>
-    </div>
+    <div style="display:none;" data-testimonial-store aria-hidden="true"></div>
 
     <div class="testimonial-wrap reveal">
       <span class="testimonial-mark">"</span>
@@ -517,6 +501,7 @@
 </footer>
 
 <script src="../config.js"></script>
+<script src="../schema-reviews.js"></script>
 <script src="../main.js"></script>
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 </body>

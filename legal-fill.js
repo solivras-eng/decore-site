@@ -12,6 +12,12 @@
   var block = document.getElementById('legal-identity-block');
   if (!block) return;
   var rows = [];
+  if (L.legalName) {
+    rows.push({
+      label: isEn ? 'Legal name' : 'Raison sociale',
+      value: L.legalName,
+    });
+  }
   if (L.legalForm) {
     rows.push({
       label: isEn ? 'Legal form' : 'Forme juridique',

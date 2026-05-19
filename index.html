@@ -344,23 +344,7 @@
     </div>
 
     <!-- Data store (hidden) -->
-    <div style="display:none;" data-testimonial-store>
-      <div data-testimonial
-        data-quote="Un cadre absolument exceptionnel. La lumière, le volume, l'atmosphère… tout était parfait pour notre séminaire. Agnès est une hôtesse remarquable, attentive à chaque détail."
-        data-author="Sophie M."
-        data-role="Directrice Marketing, Paris">
-      </div>
-      <div data-testimonial
-        data-quote="Nous avons célébré notre mariage au Décor à l'Envers et nos invités en parlent encore. Un lieu vivant, chaleureux, unique — exactement ce que nous cherchions."
-        data-author="Thomas & Julie"
-        data-role="Mariés en 2024">
-      </div>
-      <div data-testimonial
-        data-quote="Pour notre lancement de collection, nous avions besoin d'un espace à la hauteur de notre marque. Le loft a tout offert : caractère, lumière, flexibilité. Un coup de cœur."
-        data-author="Raphaëlle D."
-        data-role="Directrice Artistique">
-      </div>
-    </div>
+    <div style="display:none;" data-testimonial-store aria-hidden="true"></div>
 
     <div class="testimonial-wrap reveal">
       <span class="testimonial-mark">"</span>
@@ -518,6 +502,7 @@
 </footer>
 
 <script src="config.js"></script>
+<script src="schema-reviews.js"></script>
 <script src="main.js"></script>
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 </body>
