@@ -20,7 +20,7 @@ window.DECOR_SITE = {
    * Lien « Laisser un avis » depuis Google Business (Demander des avis).
    * Laisser vide pour masquer le bouton dédié.
    */
-  googleReviewUrl: '',
+  googleReviewUrl: 'https://g.page/r/CXq-ongRj-0EEBM/review',
   /** Carte intégrée (iframe sans clé API). Optionnel : googleMaps.embedUrl depuis « Intégrer une carte ». */
   googleMaps: {
     lat: 48.8567105,
