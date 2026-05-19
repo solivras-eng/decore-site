@@ -59,7 +59,7 @@ Une seule base **sans slash final** :
 
 Le site envoie `_replyto` depuis l’email du visiteur pour répondre directement depuis votre boîte mail.
 
-**Mentions légales** : adresse 18 rue Édouard Vaillant, directrice Agnès Bouche. Complétez `legal.siren` / `legal.siret` dans `config.js` (Kbis).
+**Mentions légales** : adresse, SIREN/SIRET, APE 68.20A, actif depuis 01/01/2020 — `config.js` → `legal-fill.js`. TVA : `legal.tva` si applicable.
 
 ## 6. Google Business (gratuit, sans widget payant)
 

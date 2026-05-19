@@ -30,7 +30,7 @@ window.DECOR_SITE = {
   },
   /**
    * Informations légales (mentions légales, confidentialité).
-   * Complétez siren / siret / legalForm / tva dès que vous les avez (Kbis, URSSAF, etc.).
+   * Source : fiche établissement (SIRENE / Kbis). TVA : compléter si applicable.
    */
   /**
    * Photo Agnès sur l-artiste.html — déposer le fichier puis décommenter :
@@ -48,6 +48,12 @@ window.DECOR_SITE = {
     country: 'France',
     siren: '390586386',
     siret: '39058638600059',
+    /** Établissement actif depuis (registre) */
+    activeSince: '2020-01-01',
+    /** Code APE / NAF */
+    apeCode: '68.20A',
+    apeLabelFr: 'Location de logements',
+    apeLabelEn: 'Rental of housing',
     tva: '',
   },
   business: {
