@@ -14,9 +14,9 @@
   function postalAddress() {
     return {
       '@type': 'PostalAddress',
-      streetAddress: legal.addressLine || '18 rue Édouard Vaillant',
-      addressLocality: legal.city || 'Bagnolet',
-      postalCode: legal.postalCode || '93170',
+      streetAddress: legal.addressLine || 'rue Édouard Vaillant',
+      addressLocality: legal.city || undefined,
+      postalCode: legal.postalCode || undefined,
       addressRegion: 'Île-de-France',
       addressCountry: 'FR',
     };
