@@ -23,5 +23,7 @@
   <url><loc>https://www.decoralenvers.com/en/terms.html</loc><changefreq>yearly</changefreq><priority>0.24</priority></url>
   <url><loc>https://www.decoralenvers.com/en/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://www.decoralenvers.com/l-artiste.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.decoralenvers.com/oeuvres.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
   <url><loc>https://www.decoralenvers.com/en/the-artist.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.decoralenvers.com/en/oeuvres.html</loc><changefreq>monthly</changefreq><priority>0.72</priority></url>
 </urlset>
