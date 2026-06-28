@@ -23,7 +23,7 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap"></noscript>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="page-oeuvres">
 <a class="skip-link" href="#contenu-principal">Aller au contenu</a>
 
 <header class="site-header">
@@ -68,17 +68,12 @@
   </div>
 </section>
 
-<section class="section section--white" style="padding-top:0;">
+<section class="section section--white section--oeuvres">
   <div class="container">
     <div class="section-header reveal">
       <span class="eyebrow text-rouille">Agnès Bouche Barbare</span>
       <div class="gold-rule"></div>
-      <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1.5rem;">
-        <h2 class="section-title" style="color:var(--navy);">Peintures, graphiques &amp; <em class="font-italic">sculptures</em></h2>
-        <p style="font-family:var(--font-body); font-size:16px; color:var(--gris); max-width:440px; line-height:1.75;">
-          Une sélection d'œuvres exposées en permanence au loft. Filtrez par catégorie pour parcourir la collection.
-        </p>
-      </div>
+      <div class="section-intro-row"><h2 class="section-title" style="color:var(--navy);">Peintures, graphiques &amp; <em class="font-italic">sculptures</em></h2><p class="section-intro-row__text">Une sélection d'œuvres exposées en permanence au loft. Filtrez par catégorie pour parcourir la collection.</p></div>
     </div>
 
     <div class="filter-bar reveal" id="gallery-filters">
@@ -88,254 +83,254 @@
       <button type="button" class="filter-btn" data-filter="sculptures">Sculptures</button>
     </div>
 
-    <div class="gallery-masonry reveal">
+    <div class="gallery-masonry gallery-masonry--oeuvres reveal">
       <div class="gallery-masonry-item" data-category="peintures" data-caption="Peinture">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/peintures/book.jpg" alt="Peinture" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="peintures" data-caption="Peinture — 10">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/peintures/book10.jpg" alt="Peinture — 10" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="peintures" data-caption="Peinture — 11">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/peintures/book11.jpg" alt="Peinture — 11" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="peintures" data-caption="Peinture — 3">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/peintures/book3.jpg" alt="Peinture — 3" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="peintures" data-caption="Peinture — 4">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/peintures/book4.jpg" alt="Peinture — 4" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="peintures" data-caption="Peinture — 5">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/peintures/book5.jpg" alt="Peinture — 5" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="peintures" data-caption="Peinture — 6">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/peintures/book6.jpg" alt="Peinture — 6" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="peintures" data-caption="Peinture — 7">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/peintures/book7.jpg" alt="Peinture — 7" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="peintures" data-caption="Peinture — 8">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/peintures/book8.jpg" alt="Peinture — 8" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="peintures" data-caption="Peinture — 9">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/peintures/book9.jpg" alt="Peinture — 9" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Abroby">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/abroby.jpg" alt="Abroby" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Afrique">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/afrique.jpg" alt="Afrique" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Amour Ses Raisons">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/amour-ses-raisons.jpg" alt="Amour Ses Raisons" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Cercle Marins">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/cercle-marins.jpg" alt="Cercle Marins" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Completude">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/completude.jpg" alt="Completude" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Damours">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/damours.jpg" alt="Damours" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Danse Meduses">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/danse-meduses.jpg" alt="Danse Meduses" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Destin">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/destin.jpg" alt="Destin" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Eclat De Joie">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/eclat-de-joie.jpg" alt="Eclat De Joie" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Frise Relief">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/frise-relief.jpg" alt="Frise Relief" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="La Joie">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/la-joie.jpg" alt="La Joie" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Lagune">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/lagune.jpg" alt="Lagune" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Mer 2">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/mer-2.jpg" alt="Mer 2" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Mer Entiers">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/mer-entiers.jpg" alt="Mer Entiers" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Mer Rouge">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/mer-rouge.jpg" alt="Mer Rouge" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Ocean">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/ocean.jpg" alt="Ocean" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Oeil">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/oeil.jpg" alt="Oeil" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Ose Detail">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/ose-detail.jpg" alt="Ose Detail" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Passage">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/passage.jpg" alt="Passage" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Tendance">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/tendance.jpg" alt="Tendance" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Toits De Paris">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/toits-de-paris.jpg" alt="Toits De Paris" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="graphiques" data-caption="Voyages">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/graphiques/voyages.jpg" alt="Voyages" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Bebe0">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/bebe0.jpg" alt="Bebe0" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Bebe1">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/bebe1.jpg" alt="Bebe1" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Bebe2">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/bebe2.jpg" alt="Bebe2" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Detail Vague">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/detail-vague.jpg" alt="Detail Vague" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Img 0859">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/img-0859.jpg" alt="Img 0859" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Img 0862">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/img-0862.jpg" alt="Img 0862" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Img 0863">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/img-0863.jpg" alt="Img 0863" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Img 0864">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/img-0864.jpg" alt="Img 0864" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Img 0874">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/img-0874.jpg" alt="Img 0874" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Img 0880">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/img-0880.jpg" alt="Img 0880" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Img 1260">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/img-1260.jpg" alt="Img 1260" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Img 1263">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/img-1263.jpg" alt="Img 1263" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Img 1267">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/img-1267.jpg" alt="Img 1267" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Img 1270">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/img-1270.jpg" alt="Img 1270" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Img 1280">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/img-1280.jpg" alt="Img 1280" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Vegetale 1">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/vegetale-1.jpg" alt="Vegetale 1" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Vegetale 2">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/vegetale-2.jpg" alt="Vegetale 2" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-masonry-item" data-category="sculptures" data-caption="Vegetale Detail">
-        <div class="img-frame" style="height:280px;">
+        <div class="img-frame">
           <img src="assets/oeuvres/sculptures/vegetale-detail.jpg" alt="Vegetale Detail" loading="lazy" decoding="async">
         </div>
       </div>
@@ -352,7 +347,7 @@
       <p style="font-family:var(--font-body); font-size:17px; color:rgba(255,255,255,0.62); margin-bottom:2.5rem; line-height:1.8;">
         Ces œuvres habitent le loft en permanence. Venez les voir lors d'une visite.
       </p>
-      <a href="contact.html" class="btn btn-primary" style="font-size:15px; padding:15px 36px;">Organiser une visite</a>
+      <div class="oeuvres-cta-actions"><a href="contact.html" class="btn btn-primary">Organiser une visite</a></div>
     </div>
   </div>
 </section>

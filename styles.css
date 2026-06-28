@@ -1191,6 +1191,116 @@ body.cursor-dark .cursor-dot  { background: #fff; }
   }
 }
 
+/* ─── PAGE: ŒUVRES (gallery + mobile) ───────────────── */
+.section--oeuvres {
+  padding-top: 0;
+}
+.section-intro-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.section-intro-row__text {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--gris);
+  max-width: 440px;
+  line-height: 1.75;
+  margin: 0;
+}
+.gallery-masonry--oeuvres .gallery-masonry-item .img-frame {
+  height: 100%;
+  width: 100%;
+}
+.gallery-masonry--oeuvres .gallery-masonry-item {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.oeuvres-cta-actions .btn {
+  display: inline-flex;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+  .section--oeuvres {
+    padding: 3.5rem 0 4rem;
+  }
+  .section--oeuvres .section-header {
+    margin-bottom: 3rem;
+  }
+  .section-intro-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .section-intro-row__text {
+    max-width: none;
+    font-size: 15px;
+  }
+  .gallery-masonry--oeuvres {
+    gap: 6px;
+  }
+  .gallery-masonry--oeuvres .gallery-masonry-item {
+    height: 240px;
+  }
+  .page-oeuvres .page-hero {
+    min-height: 340px;
+    height: 48vh;
+  }
+  .page-oeuvres .page-hero-content {
+    padding-bottom: 2.5rem;
+  }
+  .page-oeuvres .page-hero-breadcrumb {
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 0.75rem;
+  }
+  .oeuvres-cta-actions .btn {
+    width: 100%;
+    max-width: 20rem;
+  }
+}
+@media (max-width: 480px) {
+  .gallery-masonry--oeuvres {
+    grid-template-columns: 1fr;
+  }
+  .gallery-masonry--oeuvres .gallery-masonry-item {
+    height: min(72vw, 320px);
+  }
+}
+@media (hover: none) {
+  .gallery-masonry--oeuvres .gallery-masonry-item:hover img,
+  .gallery-masonry--oeuvres .img-frame:hover img {
+    transform: none;
+  }
+}
+@media (max-width: 640px) {
+  .lightbox-close {
+    top: max(0.75rem, env(safe-area-inset-top, 0px));
+    right: max(0.75rem, env(safe-area-inset-right, 0px));
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+  .lightbox-caption {
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    left: 1rem;
+    right: 1rem;
+    transform: none;
+    text-align: center;
+    max-width: none;
+    padding-inline: 0.5rem;
+  }
+  .lightbox img {
+    max-width: 96vw;
+    max-height: calc(100vh - 8rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  }
+}
+
 /* ─── PAGE: ÉVÉNEMENTS (full-bleed rows) ───────────── */
 .ev-full {
   display: grid;
