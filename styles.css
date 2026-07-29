@@ -298,7 +298,7 @@ body.cursor-dark .cursor-dot  { background: #fff; }
   font-size: 19px; color: #fff; display: block;
 }
 .header-nav {
-  display: flex; gap: 2rem; align-items: center;
+  display: none;
 }
 .header-nav a {
   font-family: var(--font-body);
@@ -1492,7 +1492,6 @@ body.cursor-dark .cursor-dot  { background: #fff; }
   .grid-2, .grid-asym, .grid-asym-rev { grid-template-columns: 1fr; gap: 3rem; }
   .footer-grid  { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   .hero-vertical { display: none; }
-  .header-nav  { display: none; }
   .header-actions .btn { display: none; }
 }
 @media (max-width: 768px) {

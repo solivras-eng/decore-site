@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ─── ACTIVE NAV LINK ─────────────────────────── */
   const currentPage = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.header-nav a, .drawer-nav a').forEach(a => {
+  document.querySelectorAll('.drawer-nav a').forEach(a => {
     const href = a.getAttribute('href');
     if (href === currentPage || (currentPage === '' && href === 'index.html')) {
       a.classList.add('active');
