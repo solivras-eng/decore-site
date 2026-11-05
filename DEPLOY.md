@@ -45,7 +45,7 @@ Une seule base **sans slash final** :
 
 ### Checklist tableau de bord [formspree.io](https://formspree.io)
 
-1. **Notifications** → email : `vingthuitsept@gmail.com` (réception Formspree uniquement ; le site affiche toujours `contact@agnesbouche.com`)
+1. **Notifications** → email de réception à configurer uniquement sur formspree.io (ne jamais l'écrire dans le dépôt ; le site affiche toujours `contact@agnesbouche.com`)
 2. **Allowed domains** (si demandé) :
    - `www.decoralenvers.com`
    - `decoralenvers.com`

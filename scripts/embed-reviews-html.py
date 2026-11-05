@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """Embed crawlable review cards from reviews.json into temoignages HTML."""
 
+import html
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 JSON_PATH = ROOT / "assets" / "data" / "reviews.json"
 MARKER = "<!-- REVIEWS-HTML -->"
+END_MARKER = "<!-- /REVIEWS-HTML -->"
 FILES = [
     (ROOT / "temoignages.html", "fr"),
     (ROOT / "en" / "temoignages.html", "en"),
@@ -42,8 +45,8 @@ def stars(rating: int, lang: str) -> str:
 
 def card_html(review: dict, lang: str) -> str:
     text = review.get("text", {})
-    body = text.get(lang) or text.get("fr") or text.get("en") or ""
-    author = review.get("author", "")
+    body = html.escape(text.get(lang) or text.get("fr") or text.get("en") or "", quote=False)
+    author = html.escape(review.get("author", ""), quote=False)
     date = format_date(review.get("date", ""), lang)
     rating = review.get("rating", 5)
     return f"""      <article class="review-card" itemscope itemtype="https://schema.org/Review">
@@ -56,12 +59,13 @@ def card_html(review: dict, lang: str) -> str:
       </article>"""
 
 
-def build_grid(reviews: list, lang: str) -> str:
+def build_grid(reviews: list, lang: str, total_reviews: int = 0) -> str:
     cards = "\n".join(card_html(r, lang) for r in reviews)
+    total = total_reviews or len(reviews)
     intro = (
-        "Extraits illustratifs — les 19 avis vérifiés sont disponibles sur notre fiche Google."
+        f"Extraits illustratifs — les {total} avis vérifiés sont disponibles sur notre fiche Google."
         if lang == "fr"
-        else "Illustrative excerpts — all 19 verified reviews are on our Google listing."
+        else f"Illustrative excerpts — all {total} verified reviews are on our Google listing."
     )
     heading = "Ce qu'ils en disent" if lang == "fr" else "What guests say"
     eyebrow = "Avis" if lang == "fr" else "Reviews"
@@ -76,12 +80,26 @@ def build_grid(reviews: list, lang: str) -> str:
     </div>"""
 
 
-def embed_file(path: Path, lang: str, reviews: list) -> None:
+LEGACY_RE = re.compile(
+    re.escape(MARKER) + r'\n    <div class="section-header.*?<div class="review-grid-inner reveal">.*?\n    </div>',
+    re.S,
+)
+
+
+def embed_file(path: Path, lang: str, reviews: list, total: int) -> None:
+    """Idempotent: the generated block lives between MARKER and END_MARKER."""
     text = path.read_text(encoding="utf-8")
     if MARKER not in text:
         raise SystemExit(f"Marker not found in {path}")
-    grid = build_grid(reviews, lang)
-    new_text = text.replace(MARKER, MARKER + "\n" + grid)
+    block = f"{MARKER}\n{build_grid(reviews, lang, total)}\n    {END_MARKER}"
+    if END_MARKER in text:
+        pattern = re.compile(re.escape(MARKER) + r".*?" + re.escape(END_MARKER), re.S)
+        new_text = pattern.sub(lambda _: block, text, count=1)
+    elif LEGACY_RE.search(text):
+        # First run after the switch: replace the grid written by the old script.
+        new_text = LEGACY_RE.sub(lambda _: block, text, count=1)
+    else:
+        new_text = text.replace(MARKER, block, 1)
     path.write_text(new_text, encoding="utf-8")
     print(f"Updated {path.relative_to(ROOT)}")
 
@@ -89,8 +107,9 @@ def embed_file(path: Path, lang: str, reviews: list) -> None:
 def main() -> None:
     data = json.loads(JSON_PATH.read_text(encoding="utf-8"))
     reviews = data.get("reviews", [])
+    total = data.get("meta", {}).get("aggregateRating", {}).get("reviewCount", 0)
     for path, lang in FILES:
-        embed_file(path, lang, reviews)
+        embed_file(path, lang, reviews, total)
 
 
 if __name__ == "__main__":

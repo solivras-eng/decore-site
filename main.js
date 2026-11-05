@@ -10,6 +10,29 @@ function isEnglishPage() {
   return document.documentElement.lang === 'en' || /\/en\//.test(location.pathname);
 }
 
+const I18N = {
+  fr: {
+    menuOpen: 'Ouvrir le menu',
+    menuClose: 'Fermer le menu',
+    quickAction: 'Action rapide',
+    formMisconfigured: 'Formulaire mal configuré (action Formspree manquante).',
+    sendFailed: 'Envoi impossible. Réessayez ou écrivez à contact@agnesbouche.com.',
+    network: 'Réseau indisponible. Réessayez dans un instant.',
+  },
+  en: {
+    menuOpen: 'Open menu',
+    menuClose: 'Close menu',
+    quickAction: 'Quick action',
+    formMisconfigured: 'Form is misconfigured (Formspree action missing).',
+    sendFailed: 'Could not send. Please try again or email contact@agnesbouche.com.',
+    network: 'Network unavailable. Please try again in a moment.',
+  },
+};
+
+function t(key) {
+  return I18N[isEnglishPage() ? 'en' : 'fr'][key];
+}
+
 function assetPath(relative) {
   return isEnglishPage() ? '../' + relative : relative;
 }
@@ -156,7 +179,10 @@ async function loadGoogleReviews() {
   const stores = document.querySelectorAll('[data-testimonial-store]');
   if (!stores.length) return;
   try {
-    const res = await fetch(assetPath('assets/data/reviews.json'));
+    const ctrl = new AbortController();
+    const timeout = setTimeout(() => ctrl.abort(), 5000);
+    const res = await fetch(assetPath('assets/data/reviews.json'), { signal: ctrl.signal });
+    clearTimeout(timeout);
     if (!res.ok) return;
     const data = await res.json();
     const reviews = Array.isArray(data.reviews) ? data.reviews : [];
@@ -179,8 +205,9 @@ async function loadGoogleReviews() {
   } catch (_) { /* optional file */ }
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-  await loadGoogleReviews();
+document.addEventListener('DOMContentLoaded', () => {
+  // Les avis se chargent en arrière-plan : le reste de la page ne les attend pas.
+  const reviewsReady = loadGoogleReviews();
   injectGoogleLinks();
   injectGoogleMaps();
   patchJsonLdSameAs();
@@ -202,6 +229,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let ring = null;
 
   if (useFineCursor) {
+    document.documentElement.classList.add('has-custom-cursor');
     dot = document.createElement('div');
     ring = document.createElement('div');
     dot.className = 'cursor-dot';
@@ -220,6 +248,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       ry += (my - ry) * 0.14;
       ring.style.left = rx + 'px';
       ring.style.top = ry + 'px';
+      // Onglet masqué : on suspend la boucle, elle repart à la reprise.
+      if (document.hidden) {
+        document.addEventListener('visibilitychange', animateRing, { once: true });
+        return;
+      }
       requestAnimationFrame(animateRing);
     })();
 
@@ -235,7 +268,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const isDark = bg.includes('10, 18, 40') || bg.includes('17, 29, 58');
       document.body.classList.toggle('cursor-dark', isDark);
     }
-    setInterval(updateCursorColor, 200);
+    setInterval(() => { if (!document.hidden) updateCursorColor(); }, 200);
   }
 
   /* ─── HEADER SCROLL ───────────────────────────── */
@@ -267,7 +300,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       drawerOverlay?.classList.toggle('open', open);
       document.body.style.overflow = open ? 'hidden' : '';
       hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      hamburger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+      hamburger.setAttribute('aria-label', open ? t('menuClose') : t('menuOpen'));
     };
 
     hamburger.addEventListener('click', () => toggleMenu(!drawer.classList.contains('open')));
@@ -285,7 +318,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => io.observe(el));
 
   /* ─── TESTIMONIAL CAROUSEL (one block per .testimonial-wrap) ─ */
-  document.querySelectorAll('.testimonial-wrap').forEach(wrap => {
+  // Démarre une fois les avis injectés (ou si le chargement a échoué).
+  reviewsReady.then(() => { document.querySelectorAll('.testimonial-wrap').forEach(wrap => {
     const root = wrap.closest('.container') || document;
     const testimonials = root.querySelectorAll('[data-testimonial]');
     const dotsContainer = wrap.querySelector('.testimonial-dots');
@@ -350,19 +384,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     dots.forEach((d, i) => d.addEventListener('click', () => show(i)));
     show(0);
 
+    quoteEl.setAttribute('aria-live', 'polite');
+
     let timer = null;
-    if (!prefersReducedMotion) {
-      timer = setInterval(() => show(current + 1), 5000);
-    }
-    dots.forEach(d => {
-      d.addEventListener('click', () => {
-        if (timer) clearInterval(timer);
-        if (!prefersReducedMotion) {
-          timer = setInterval(() => show(current + 1), 5000);
-        }
-      });
-    });
-  });
+    const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+    const start = () => {
+      stop();
+      if (!prefersReducedMotion && !document.hidden) {
+        timer = setInterval(() => show(current + 1), 5000);
+      }
+    };
+    start();
+    // Pause au survol, au focus clavier et quand l'onglet est masqué (WCAG 2.2.2).
+    wrap.addEventListener('mouseenter', stop);
+    wrap.addEventListener('mouseleave', start);
+    wrap.addEventListener('focusin', stop);
+    wrap.addEventListener('focusout', start);
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    dots.forEach(d => d.addEventListener('click', start));
+  }); });
 
   /* ─── CONTACT FORM (Formspree, fetch JSON) ─────── */
   const contactForm = document.querySelector('.contact-form');
@@ -376,6 +416,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     setTimeout(() => {
       formEl.style.display = 'none';
       formSuccess.style.display = 'block';
+      formSuccess.setAttribute('role', 'status');
+      formSuccess.setAttribute('tabindex', '-1');
+      formSuccess.focus({ preventScroll: false });
       setTimeout(() => { formSuccess.style.opacity = '1'; }, 20);
     }, 400);
   }
@@ -399,7 +442,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const action = contactForm.getAttribute('action');
       if (!action || !/^https:\/\/formspree\.io\//i.test(action)) {
-        showFormError('Formulaire mal configuré (action Formspree manquante).');
+        showFormError(t('formMisconfigured'));
         return;
       }
 
@@ -424,7 +467,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           return;
         }
 
-        let msg = 'Envoi impossible. Réessayez ou écrivez à contact@agnesbouche.com.';
+        let msg = t('sendFailed');
         try {
           const data = await res.json();
           if (data && data.error) {
@@ -434,7 +477,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         showFormError(msg);
       } catch (_) {
         if (submitBtn) submitBtn.disabled = false;
-        showFormError('Réseau indisponible. Réessayez dans un instant.');
+        showFormError(t('network'));
       }
     });
   }
@@ -445,7 +488,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const bar = document.createElement('div');
     bar.className = 'mobile-sticky-cta';
     bar.setAttribute('role', 'region');
-    bar.setAttribute('aria-label', 'Action rapide');
+    bar.setAttribute('aria-label', t('quickAction'));
     const page = (location.pathname.split('/').pop() || '').toLowerCase();
     const href = page === 'contact.html' ? '#contact-form' : 'contact.html';
     const link = document.createElement('a');
