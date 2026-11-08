@@ -135,6 +135,38 @@
           <p class="form-honeypot" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
             <label>Do not fill in<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
           </p>
+          <!-- Individual / Company -->
+          <div class="f-group">
+            <span class="f-label">You are *</span>
+            <div style="display:flex; gap:1.5rem; margin-top:0.5rem;">
+              <label style="display:flex; align-items:center; gap:0.5rem; font-family:var(--font-body); font-size:15px; color:var(--navy); cursor:pointer;">
+                <input type="radio" name="client_type" value="Particulier" id="type-particulier" required
+                  style="accent-color:var(--rouille);" checked>
+                Individual
+              </label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-family:var(--font-body); font-size:15px; color:var(--navy); cursor:pointer;">
+                <input type="radio" name="client_type" value="Entreprise" id="type-entreprise"
+                  style="accent-color:var(--rouille);">
+                Company
+              </label>
+            </div>
+          </div>
+
+          <!-- Company / SIRET (Company only) -->
+          <div id="bloc-entreprise" style="display:none;">
+            <div class="f-row" style="margin-bottom:1.2rem;">
+              <div class="f-group" style="margin-bottom:0;">
+                <label class="f-label" for="societe">Company name *</label>
+                <input class="f-input" type="text" id="societe" name="societe">
+              </div>
+              <div class="f-group" style="margin-bottom:0;">
+                <label class="f-label" for="siret">SIRET *</label>
+                <input class="f-input" type="text" id="siret" name="siret" placeholder="14 digits">
+              </div>
+            </div>
+          </div>
+
+          <!-- First / Last name -->
           <div class="f-row" style="margin-bottom:1.2rem;">
             <div class="f-group" style="margin-bottom:0;">
               <label class="f-label" for="prenom">First name *</label>
@@ -146,17 +178,37 @@
             </div>
           </div>
 
+          <!-- Email / Phone -->
           <div class="f-row" style="margin-bottom:1.2rem;">
             <div class="f-group" style="margin-bottom:0;">
               <label class="f-label" for="email">Email *</label>
               <input class="f-input" type="email" id="email" name="email" required>
             </div>
             <div class="f-group" style="margin-bottom:0;">
-              <label class="f-label" for="telephone">Phone</label>
-              <input class="f-input" type="tel" id="telephone" name="telephone">
+              <label class="f-label" for="telephone">Phone *</label>
+              <input class="f-input" type="tel" id="telephone" name="telephone" required>
             </div>
           </div>
 
+          <!-- Address -->
+          <div class="f-group">
+            <label class="f-label" for="adresse">Address</label>
+            <input class="f-input" type="text" id="adresse" name="adresse" placeholder="Street address">
+          </div>
+
+          <!-- Postcode / City -->
+          <div class="f-row" style="margin-bottom:1.2rem;">
+            <div class="f-group" style="margin-bottom:0;">
+              <label class="f-label" for="code_postal">Postcode</label>
+              <input class="f-input" type="text" id="code_postal" name="code_postal">
+            </div>
+            <div class="f-group" style="margin-bottom:0;">
+              <label class="f-label" for="ville">City</label>
+              <input class="f-input" type="text" id="ville" name="ville">
+            </div>
+          </div>
+
+          <!-- Type of event -->
           <div class="f-group">
             <label class="f-label" for="type">Type of event *</label>
             <select class="f-input" id="type" name="type" required>
@@ -172,17 +224,54 @@
             </select>
           </div>
 
+          <!-- Date / Guests -->
           <div class="f-row">
             <div class="f-group">
-              <label class="f-label" for="date">Preferred date</label>
-              <input class="f-input" type="date" id="date" name="date">
+              <label class="f-label" for="date">Preferred date *</label>
+              <input class="f-input" type="date" id="date" name="date" required>
             </div>
             <div class="f-group">
-              <label class="f-label" for="personnes">Number of guests</label>
-              <input class="f-input" type="number" id="personnes" name="personnes" min="1" max="120" placeholder="Approximate">
+              <label class="f-label" for="personnes">Number of guests *</label>
+              <input class="f-input" type="number" id="personnes" name="personnes" min="1" max="120" placeholder="Approximate" required>
             </div>
           </div>
 
+          <!-- Times -->
+          <div class="f-row">
+            <div class="f-group">
+              <label class="f-label" for="heure">Arrival time</label>
+              <input class="f-input" type="time" id="heure" name="heure">
+            </div>
+            <div class="f-group">
+              <label class="f-label" for="heure_fin">End time</label>
+              <input class="f-input" type="time" id="heure_fin" name="heure_fin">
+              <span style="font-family:var(--font-body); font-size:12px; color:var(--gris); margin-top:4px; display:block;">2:00 AM at the latest</span>
+            </div>
+          </div>
+
+          <!-- Catering -->
+          <div class="f-group">
+            <label class="f-label" for="traiteur">Are you using a caterer?</label>
+            <select class="f-input" id="traiteur" name="traiteur">
+              <option value="">Select…</option>
+              <option value="Oui">Yes</option>
+              <option value="Non">No</option>
+              <option value="Je ne sais pas encore">Not sure yet</option>
+            </select>
+          </div>
+
+          <!-- Setup / Breakdown -->
+          <div class="f-group">
+            <label class="f-label" for="montage">Do you need setup / breakdown time?</label>
+            <select class="f-input" id="montage" name="montage">
+              <option value="">Select…</option>
+              <option value="Oui">Yes</option>
+              <option value="Non">No</option>
+              <option value="Je ne sais pas encore">Not sure yet</option>
+            </select>
+          </div>
+
+          <!-- Budget -->
           <div class="f-group">
             <label class="f-label" for="budget">Indicative budget</label>
             <select class="f-input" id="budget" name="budget">
@@ -195,6 +284,7 @@
             </select>
           </div>
 
+          <!-- Message -->
           <div class="f-group">
             <label class="f-label" for="message">Your message</label>
             <textarea class="f-input" id="message" name="message" rows="5"
@@ -341,6 +431,24 @@
 <script src="../main.js"></script>
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Show / hide Company block based on client type
+  (function () {
+    var radios = document.querySelectorAll('input[name="client_type"]');
+    var bloc = document.getElementById('bloc-entreprise');
+    var societe = document.getElementById('societe');
+    var siret = document.getElementById('siret');
+
+    function toggle() {
+      var isEntreprise = document.getElementById('type-entreprise').checked;
+      bloc.style.display = isEntreprise ? '' : 'none';
+      societe.required = isEntreprise;
+      siret.required = isEntreprise;
+    }
+
+    radios.forEach(function (r) { r.addEventListener('change', toggle); });
+    toggle();
+  })();
 </script>
 </body>
 </html>
