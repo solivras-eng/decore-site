@@ -106,26 +106,72 @@ function buildMapsEmbedUrl() {
   return 'https://maps.google.com/maps?q=' + q + '&hl=' + hl + '&z=' + zoom + '&output=embed';
 }
 
+/* ─── COOKIE CONSENT (Google Maps embed is the only non-essential
+   cookie this site sets — no analytics, no ads) ──────────────── */
+const MAP_CONSENT_KEY = 'decor_map_consent'; // 'accepted' | 'declined'
+
+function getMapConsent() {
+  try { return localStorage.getItem(MAP_CONSENT_KEY); } catch (_) { return null; }
+}
+function setMapConsent(value) {
+  try { localStorage.setItem(MAP_CONSENT_KEY, value); } catch (_) { /* ignore */ }
+}
+
+function loadMapIframe(wrap) {
+  if (wrap.querySelector('iframe')) return;
+  const embedSrc = buildMapsEmbedUrl();
+  if (!embedSrc) return;
+  const placeholder = wrap.querySelector('.map-consent-placeholder');
+  if (placeholder) placeholder.remove();
+  const iframe = document.createElement('iframe');
+  iframe.src = embedSrc;
+  iframe.setAttribute('loading', 'lazy');
+  iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+  iframe.setAttribute(
+    'title',
+    isEnglishPage()
+      ? "Map — Le Décor à l'Envers, Bagnolet"
+      : "Carte — Le Décor à l'Envers, Bagnolet"
+  );
+  iframe.setAttribute('allowfullscreen', '');
+  wrap.appendChild(iframe);
+}
+
+function showMapConsentPlaceholder(wrap) {
+  if (wrap.querySelector('.map-consent-placeholder') || wrap.querySelector('iframe')) return;
+  const isEn = isEnglishPage();
+  const placeholder = document.createElement('div');
+  placeholder.className = 'map-consent-placeholder';
+  const p = document.createElement('p');
+  p.textContent = isEn
+    ? 'This map is provided by Google and sets a third-party cookie. Show it only if you agree.'
+    : "Cette carte est fournie par Google et dépose un cookie tiers. Affichez-la seulement si vous êtes d'accord.";
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'btn btn-ghost';
+  btn.textContent = isEn ? 'Show the map' : 'Afficher la carte';
+  btn.addEventListener('click', () => {
+    setMapConsent('accepted');
+    loadMapIframe(wrap);
+    hideCookieBanner();
+  });
+  placeholder.appendChild(p);
+  placeholder.appendChild(btn);
+  wrap.appendChild(placeholder);
+}
+
 function injectGoogleMaps() {
   const embedSrc = buildMapsEmbedUrl();
   const biz = String(siteConfig().googleBusinessUrl || '').trim();
-  const isEn = isEnglishPage();
   if (!embedSrc) return;
 
   document.querySelectorAll('[data-google-map]').forEach(wrap => {
-    if (wrap.querySelector('iframe')) return;
-    const iframe = document.createElement('iframe');
-    iframe.src = embedSrc;
-    iframe.setAttribute('loading', 'lazy');
-    iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
-    iframe.setAttribute(
-      'title',
-      isEn
-        ? "Map — Le Décor à l'Envers, Bagnolet"
-        : "Carte — Le Décor à l'Envers, Bagnolet"
-    );
-    iframe.setAttribute('allowfullscreen', '');
-    wrap.appendChild(iframe);
+    if (wrap.querySelector('iframe') || wrap.querySelector('.map-consent-placeholder')) return;
+    if (getMapConsent() === 'accepted') {
+      loadMapIframe(wrap);
+    } else {
+      showMapConsentPlaceholder(wrap);
+    }
 
     const linkEl = wrap.parentElement && wrap.parentElement.querySelector('[data-google-map-link]');
     if (linkEl && biz) {
@@ -134,6 +180,82 @@ function injectGoogleMaps() {
       linkEl.rel = 'noopener noreferrer';
       linkEl.hidden = false;
     }
+  });
+}
+
+function hideCookieBanner() {
+  const banner = document.getElementById('cookie-banner');
+  if (!banner) return;
+  banner.classList.remove('open');
+  setTimeout(() => banner.remove(), 400);
+}
+
+function showCookieBanner() {
+  if (document.getElementById('cookie-banner')) return;
+  const isEn = isEnglishPage();
+  const privacyHref = isEn ? 'privacy.html' : 'confidentialite.html';
+
+  const banner = document.createElement('div');
+  banner.className = 'cookie-banner';
+  banner.id = 'cookie-banner';
+  banner.setAttribute('role', 'region');
+  banner.setAttribute('aria-label', isEn ? 'Cookie preferences' : 'Préférences cookies');
+
+  const text = document.createElement('p');
+  text.className = 'cookie-banner-text';
+  text.appendChild(document.createTextNode(
+    isEn
+      ? 'We use a single optional cookie — Google Maps, to show the venue map on some pages. No tracking, no advertising, nothing else. '
+      : 'Nous utilisons un seul cookie optionnel : Google Maps, pour afficher la carte du lieu sur certaines pages. Aucun traceur, aucune publicité, rien d’autre. '
+  ));
+  const link = document.createElement('a');
+  link.href = privacyHref;
+  link.textContent = isEn ? 'Learn more' : 'En savoir plus';
+  text.appendChild(link);
+
+  const actions = document.createElement('div');
+  actions.className = 'cookie-banner-actions';
+  const declineBtn = document.createElement('button');
+  declineBtn.type = 'button';
+  declineBtn.id = 'cookie-decline';
+  declineBtn.className = 'btn btn-dark';
+  declineBtn.textContent = isEn ? 'Decline' : 'Refuser';
+  const acceptBtn = document.createElement('button');
+  acceptBtn.type = 'button';
+  acceptBtn.id = 'cookie-accept';
+  acceptBtn.className = 'btn btn-primary';
+  acceptBtn.textContent = isEn ? 'Accept' : 'Accepter';
+  actions.appendChild(declineBtn);
+  actions.appendChild(acceptBtn);
+
+  banner.appendChild(text);
+  banner.appendChild(actions);
+  document.body.appendChild(banner);
+  requestAnimationFrame(() => banner.classList.add('open'));
+
+  declineBtn.addEventListener('click', () => {
+    setMapConsent('declined');
+    hideCookieBanner();
+  });
+  acceptBtn.addEventListener('click', () => {
+    setMapConsent('accepted');
+    hideCookieBanner();
+    document.querySelectorAll('[data-google-map]').forEach(loadMapIframe);
+  });
+}
+
+function initCookieConsent() {
+  if (getMapConsent() == null) showCookieBanner();
+
+  const isEn = isEnglishPage();
+  document.querySelectorAll('.footer-legal').forEach(el => {
+    if (el.querySelector('[data-cookie-settings]')) return;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.setAttribute('data-cookie-settings', '');
+    btn.textContent = isEn ? 'Cookie settings' : 'Gérer les cookies';
+    btn.addEventListener('click', showCookieBanner);
+    el.appendChild(btn);
   });
 }
 
@@ -211,6 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
   injectGoogleLinks();
   injectGoogleMaps();
   patchJsonLdSameAs();
+  initCookieConsent();
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const useFineCursor = window.matchMedia('(pointer: fine)').matches && !prefersReducedMotion;
