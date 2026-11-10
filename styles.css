@@ -619,6 +619,7 @@ body.cursor-dark .cursor-dot  { background: #fff; }
 }
 .img-frame:hover img { transform: scale(1.04); }
 .img-frame--xl { height: 520px; }
+.img-frame--xl img { object-position: 70% center; }
 .img-frame--lg { height: 380px; }
 .img-frame--md { height: 340px; }
 .img-frame--sm { height: 320px; }
@@ -1521,7 +1522,6 @@ body.cursor-dark .cursor-dot  { background: #fff; }
   .img-frame--lg { height: 300px; }
   .img-frame--md { height: 280px; }
   .img-frame--sm { height: 260px; }
-  .img-frame--xl img { object-position: center 20%; }
 }
 @media (max-width: 640px) {
   .footer-grid   { grid-template-columns: 1fr; }
