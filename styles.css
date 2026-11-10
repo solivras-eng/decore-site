@@ -618,6 +618,11 @@ body.cursor-dark .cursor-dot  { background: #fff; }
   transition: transform 0.7s var(--ease-out);
 }
 .img-frame:hover img { transform: scale(1.04); }
+.img-frame--xl { height: 520px; }
+.img-frame--lg { height: 380px; }
+.img-frame--md { height: 340px; }
+.img-frame--sm { height: 320px; }
+.img-frame[data-zoomable] { cursor: zoom-in; }
 
 /* ─── STATS ROW ──────────────────────────────────────── */
 .stat-item {
@@ -1505,6 +1510,11 @@ body.cursor-dark .cursor-dot  { background: #fff; }
   .service-item { grid-template-columns: 60px 1fr; }
   .service-item > :last-child { grid-column: 2; }
   .hero-meta { flex-direction: column; align-items: flex-start; }
+  .img-frame--xl { height: 380px; }
+  .img-frame--lg { height: 300px; }
+  .img-frame--md { height: 280px; }
+  .img-frame--sm { height: 260px; }
+  .img-frame--xl img { object-position: center 20%; }
 }
 @media (max-width: 640px) {
   .footer-grid   { grid-template-columns: 1fr; }

@@ -521,4 +521,91 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ─── ZOOMABLE PHOTOS (standalone .img-frame[data-zoomable]) ─
+     Lets any thumbnail cropped via object-fit:cover be opened
+     full-frame (object-fit:contain) so the whole photo is always
+     visible. Pages with their own gallery lightbox (galerie.html,
+     oeuvres.html) don't use data-zoomable and are unaffected. */
+  (function initZoomablePhotos() {
+    const frames = Array.from(document.querySelectorAll('.img-frame[data-zoomable]'));
+    if (!frames.length) return;
+    const isEn = isEnglishPage();
+
+    const lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.id = 'zoom-lightbox';
+    lb.setAttribute('aria-hidden', 'true');
+    lb.innerHTML =
+      '<button type="button" class="lightbox-close" aria-label="' + (isEn ? 'Close' : 'Fermer') + '">✕</button>' +
+      '<button type="button" class="lightbox-nav lightbox-nav--prev" aria-label="' + (isEn ? 'Previous photo' : 'Photo précédente') + '">‹</button>' +
+      '<button type="button" class="lightbox-nav lightbox-nav--next" aria-label="' + (isEn ? 'Next photo' : 'Photo suivante') + '">›</button>' +
+      '<img src="" alt="">' +
+      '<div class="lightbox-caption"></div>';
+    document.body.appendChild(lb);
+
+    const lbImg = lb.querySelector('img');
+    const lbCap = lb.querySelector('.lightbox-caption');
+    const lbClose = lb.querySelector('.lightbox-close');
+    const lbPrev = lb.querySelector('.lightbox-nav--prev');
+    const lbNext = lb.querySelector('.lightbox-nav--next');
+    let index = 0;
+    let focusReturn = null;
+
+    if (frames.length < 2) {
+      lbPrev.style.display = 'none';
+      lbNext.style.display = 'none';
+    }
+
+    function show(i) {
+      index = (i + frames.length) % frames.length;
+      const img = frames[index].querySelector('img');
+      if (!img) return;
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt || '';
+      lbCap.textContent = img.alt || '';
+    }
+
+    function openAt(i) {
+      show(i);
+      lb.classList.add('open');
+      lb.setAttribute('role', 'dialog');
+      lb.setAttribute('aria-modal', 'true');
+      lb.setAttribute('aria-label', isEn ? 'Full-size photo' : 'Photo en entier');
+      lb.removeAttribute('aria-hidden');
+      document.body.style.overflow = 'hidden';
+      focusReturn = document.activeElement;
+      lbClose.focus();
+    }
+
+    function close() {
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      lb.removeAttribute('role');
+      lb.removeAttribute('aria-modal');
+      document.body.style.overflow = '';
+      if (focusReturn && typeof focusReturn.focus === 'function') focusReturn.focus();
+    }
+
+    frames.forEach((frame, i) => {
+      frame.setAttribute('role', 'button');
+      frame.setAttribute('tabindex', '0');
+      frame.setAttribute('aria-label', isEn ? 'View full photo' : 'Voir la photo en entier');
+      frame.addEventListener('click', () => openAt(i));
+      frame.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openAt(i); }
+      });
+    });
+
+    lbPrev.addEventListener('click', e => { e.stopPropagation(); show(index - 1); });
+    lbNext.addEventListener('click', e => { e.stopPropagation(); show(index + 1); });
+    lbClose.addEventListener('click', close);
+    lb.addEventListener('click', e => { if (e.target === lb) close(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); show(index - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); show(index + 1); }
+    });
+  })();
+
 });
