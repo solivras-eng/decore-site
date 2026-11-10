@@ -954,6 +954,13 @@ body.cursor-dark .cursor-dot  { background: #fff; }
   transition: color 0.2s;
 }
 .footer-legal a:hover { color: rgba(255,255,255,0.55); }
+.footer-legal button {
+  font-family: var(--font-body);
+  font-size: 13px; color: rgba(255,255,255,0.25);
+  background: none; border: none; padding: 0; cursor: pointer;
+  transition: color 0.2s;
+}
+.footer-legal button:hover { color: rgba(255,255,255,0.55); }
 
 /* ─── REVEAL ANIMATIONS ──────────────────────────────── */
 .reveal {
@@ -1615,6 +1622,43 @@ body.cursor-dark .cursor-dot  { background: #fff; }
 }
 .google-map-link:hover { text-decoration: underline; }
 .section--navy .google-map-link { color: var(--bleu-clair); }
+.map-consent-placeholder {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.2rem; text-align: center; padding: 1.5rem;
+}
+.map-consent-placeholder p {
+  font-family: var(--font-body); font-size: 14px; line-height: 1.7;
+  color: rgba(255,255,255,0.7); max-width: 320px; margin: 0;
+}
+
+/* ─── COOKIE BANNER ──────────────────────────────────── */
+.cookie-banner {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 600;
+  background: var(--navy);
+  border-top: 1px solid rgba(186,117,23,0.35);
+  padding: 1.25rem 2rem;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 1.5rem;
+  transform: translateY(100%);
+  transition: transform 0.4s var(--ease-out);
+}
+.cookie-banner.open { transform: translateY(0); }
+.cookie-banner-text {
+  font-family: var(--font-body); font-size: 14px; line-height: 1.7;
+  color: rgba(255,255,255,0.78);
+  max-width: 640px; margin: 0;
+}
+.cookie-banner-text a { color: var(--bleu-clair); }
+.cookie-banner-text a:hover { text-decoration: underline; }
+.cookie-banner-actions { display: flex; gap: 0.75rem; flex-shrink: 0; }
+.cookie-banner-actions .btn { padding: 11px 22px; font-size: 13px; }
+@media (max-width: 640px) {
+  .cookie-banner { flex-direction: column; padding: 1.5rem 1.25rem; text-align: center; }
+  .cookie-banner-text { max-width: none; }
+  .cookie-banner-actions { width: 100%; justify-content: center; }
+  .cookie-banner-actions .btn { flex: 1; justify-content: center; }
+}
 .google-map-times {
   margin-top: 1.5rem;
   padding: 1.5rem 1.75rem;
