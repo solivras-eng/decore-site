@@ -722,6 +722,8 @@ body.cursor-dark .cursor-dot  { background: #fff; }
 .gallery-masonry .tall { grid-row: span 2; }
 .gallery-masonry-item { overflow: hidden; height: 280px; }
 .gallery-masonry .tall { height: 568px; }
+.gallery-masonry .wide { grid-column: span 2; }
+.gallery-masonry-item.wide .img-frame img { object-fit: contain; background: var(--sable); }
 .gallery-masonry-item img {
   width: 100%; height: 100%; object-fit: cover;
   transition: transform 0.7s var(--ease-out);
